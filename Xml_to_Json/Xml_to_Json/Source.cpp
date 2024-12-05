@@ -1,94 +1,178 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <stack>
+#include <vector>
+#include <algorithm>
 
-using namespace ::std;
-
+using namespace std;
 
 void Xml_to_Json(const string& input, const string& output) {
     ifstream inputFile(input);
     ofstream outputFile(output);
-    if (!inputFile.is_open()) 
+    if (input.empty())
     {
-        cout << "Unable to open input file: " << input << std::endl;
+        cout << "The input file path " << input << "is empty. Please provide a valid file.\n";
         return;
     }
-    if (!outputFile.is_open()) 
+    /*if(!valid(input)) 
     {
-        cout << "Unable to open output file: " << output << std::endl;
+        cout << "The input file: " << input << "is invalid please choose another one" << endl;
+        return;
+    }*/
+    if (!inputFile.is_open())
+    {
+        cout << "Unable to open input file: " << input << endl;
         return;
     }
-    string line;
-    string line_dash = "";
-    string json_code = "{\n";
-    int tabs = 1;
-    string tag_name_old = "";
-    string tag_name = ""; 
+    if (!outputFile.is_open())
+    {
+        cout << "Unable to open output file: " << output << endl;
+        return;
+    }
+
+    string line, tag_name = "", json_code = "{\n";
+    int tabs = 1, no_of_tags = 0;
+    stack<string> tags;
+    stack<vector<string>> parents_tag;
+    parents_tag.push({});
+    vector<string> repeated_tags;
+    bool close = true;
+
+   
     while (getline(inputFile, line)) {
-        int i;
-        string block;
-        while (1)
-        {   
-            block += line;
-            for (i = 0;i < line.size() - 1;i++)
-            {
-                if (line[i] == '<' && line[i + 1] == '/')
-                {
-                    break;
-                }
-            }
-            block += ' ';
-            getline(inputFile, line);
-        }
-        bool set;
-        for (i = 0;i < block.size();i++)
+        int start_of_tag = line.find('<');
+        int end_of_tag = line.find('>');
+        string remainder = line.substr(end_of_tag + 1);
+
+        bool same_line = !remainder.empty()? true: false;
+        
+        /*if (remainder.empty() && !close)
         {
+            tabs--;
+            json_code += ",\n";
+            close = 1;
+            continue;
+        }*/
+        if (start_of_tag < line.size() && start_of_tag >= 0 && end_of_tag < line.size() && end_of_tag >= 0) {
+            string tagContent = line.substr(start_of_tag + 1, end_of_tag - start_of_tag - 1);
+            if (tagContent[0] == '/') {
+                string closing_tag = tagContent.substr(1);
 
-            if (block[i] == '<' && line[i + 1] == '/')
-            {
-                if(set) line_dash += '},';
-                else line_dash += ',';
+                if (!tags.empty() && tags.top() == closing_tag) {
+                    tags.pop();
+                    vector<string>& parents = parents_tag.top();
+                    parents_tag.pop();
+                    tabs--;
+
+                    no_of_tags = count(parents.begin(), parents.end(), closing_tag);
+                    
+
+                    if (no_of_tags > 1)
+                    {
+                        json_code.pop_back();
+                        json_code += "\n" + string(tabs, '\t') + "]\n";
+                    }
+                    else
+                    {
+                        if (!close)
+                        {
+                            close = true;
+                            json_code += "\n";
+                        }
+                        else
+                        {
+                            json_code.pop_back();
+                            json_code += "\n" + string(tabs, '\t') + "},\n";
+                        }
+                        
+                    }
+                }
             }
-            else if (line[i] == '<')           //&& line[i+1] != '/'
-            {
-                tabs++;
-                line_dash += '"';
-                for (++i;line[i] == '>';i++)
-                {
-                    tag_name += line[i];
-                    line_dash += line[i];
-                }
-                line_dash += "\": ";
-                if (tag_name == tag_name_old.substr(0, tag_name_old.size() - 1))
-                {
-                    line_dash += '[';
+            else {
+                int spacePos = tagContent.find(' ');
+                bool selfClosing = tagContent.back() == '/';
+                tag_name = (spacePos != -1) ? tagContent.substr(0, spacePos) : tagContent;
 
-                }
-                else if (tag_name == tag_name_old)
+                vector<string>& parent = parents_tag.top();
+                parent.push_back(tag_name);
+                repeated_tags.push_back(tag_name);
+                if (selfClosing)
                 {
-                    line_dash = "{";
+                    json_code += string(tabs, '\t') + "\"" + tag_name + "\": null,\n";
                 }
                 else 
                 {
-                    line_dash += "{";
-                    tag_name_old = tag_name ;
-                    tag_name = "";
-                }
-                if (i == line.size())      //&& line_dash[line_dash.size() - 1] == '{' || '['
-                {
-                    json_code += string(tabs, '\t');
-                    json_code += line_dash;
-                    line_dash = "";
-                    json_code += '\n';
-                    tabs++;
-                    continue; //equivalent to break
+                    if (!same_line )
+                    {
+                        no_of_tags = count(parent.begin(), parent.end(), tag_name);
+                        
+                        if (no_of_tags == 1 || tag_name.back() == 's')
+                        {
+                            json_code += string(tabs, '\t') + "\"" + tag_name + "\": {\n";
+                        }
+                        else if (parent[parent.size() - 2] == tag_name + "s")
+                        {
+                            json_code.pop_back();
+                            json_code += string(tabs, '\t') + "\"" + tag_name + "\": [\n";
+                        }
+                        else
+                        {
+                            json_code += string(tabs + 1, '\t') + "{\n";
+                        }
+
+                        tags.push(tag_name);
+                        parents_tag.push({});
+                        tabs++;
+                    }
+                    
                 }
             }
-
+            int contentStart = end_of_tag + 1;
+            int contentEnd = line.find('<', contentStart);
+            if (contentEnd != - 1 && contentEnd > contentStart)
+            {
+                string content = line.substr(contentStart, contentEnd - contentStart);
+                if (!content.empty())
+                {
+                    json_code += string(tabs, '\t') + "\"" + tag_name + "\": \"" + content + "\",\n";
+                }
+                
+            }
             
-
+        }
+        else
+        {
+            string not_tags = "\"";
+            bool started = 0;
+            for (int j = 0; j < line.size(); j++)
+            {
+                if (!started)
+                {
+                    if (line[j] == ' ' || line[j] == '\t')
+                    {
+                        continue;
+                    }
+                }
+                started = 1;
+                not_tags += line[j];
+            }
+            close = false;
+            not_tags += "\", ";
+            json_code.pop_back();
+            json_code.pop_back();
+            json_code += not_tags;
         }
     }
+
+    if (json_code.back() == ',') 
+    {
+        json_code.pop_back(); 
+    }
+    json_code += "\n}\n";
+
+    cout << json_code;
+    outputFile << json_code;
 
     inputFile.close();
     outputFile.close();
@@ -100,3 +184,4 @@ int main() {
     Xml_to_Json(inputFilePath, outputFilePath);
     return 0;
 }
+
