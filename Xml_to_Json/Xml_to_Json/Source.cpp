@@ -82,6 +82,7 @@ void Xml_to_Json(const string& input, const string& output) {
                         }
                         else
                         {
+                            while(json_code.back() != ',')json_code.pop_back();
                             json_code.pop_back();
                             json_code += "\n" + string(tabs, '\t') + "},\n";
                         }
@@ -165,10 +166,8 @@ void Xml_to_Json(const string& input, const string& output) {
         }
     }
 
-    if (json_code.back() == ',') 
-    {
-        json_code.pop_back(); 
-    }
+    while (json_code.back() != ',')json_code.pop_back();
+    json_code.pop_back();
     json_code += "\n}\n";
 
     cout << json_code;
