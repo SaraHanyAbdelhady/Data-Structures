@@ -35,60 +35,73 @@ void Xml_to_Json(const string& input, const string& output) {
     int tabs = 1, no_of_tags = 0;
     stack<string> tags;
     stack<vector<string>> parents_tag;
+    stack<string> before_set;
     parents_tag.push({});
-    vector<string> repeated_tags;
+    stack<string> prev_before_set ;
     bool close = true;
-
-   
+    stack<string> temp;
+    stack<string> before_array;
+    
+    
     while (getline(inputFile, line)) {
         int start_of_tag = line.find('<');
         int end_of_tag = line.find('>');
         string remainder = line.substr(end_of_tag + 1);
-
         bool same_line = !remainder.empty()? true: false;
         
-        /*if (remainder.empty() && !close)
-        {
-            tabs--;
-            json_code += ",\n";
-            close = 1;
-            continue;
-        }*/
         if (start_of_tag < line.size() && start_of_tag >= 0 && end_of_tag < line.size() && end_of_tag >= 0) {
             string tagContent = line.substr(start_of_tag + 1, end_of_tag - start_of_tag - 1);
-            if (tagContent[0] == '/') {
+            if (tagContent[0] == '/') 
+            {
                 string closing_tag = tagContent.substr(1);
-
+                tabs--;
                 if (!tags.empty() && tags.top() == closing_tag) {
                     tags.pop();
                     vector<string>& parents = parents_tag.top();
                     parents_tag.pop();
-                    tabs--;
 
                     no_of_tags = count(parents.begin(), parents.end(), closing_tag);
-                    
-
-                    if (no_of_tags > 1)
+                    if (!before_array.empty() && closing_tag == before_array.top())
                     {
+                        while (json_code.back() != ',')json_code.pop_back();
                         json_code.pop_back();
-                        json_code += "\n" + string(tabs, '\t') + "]\n";
+                        if (json_code.back() == ']') 
+                        {
+                            json_code += ", \n";
+                        }
+                        else json_code += "\n" + string(tabs-- +1 , '\t') + "],\n";
+                        
+                        before_array.pop();
+                    }
+                    if (!close)
+                    {
+                        close = true;
+                        json_code += "\n";
                     }
                     else
                     {
-                        if (!close)
-                        {
-                            close = true;
-                            json_code += "\n";
-                        }
-                        else
-                        {
-                            while(json_code.back() != ',')json_code.pop_back();
-                            json_code.pop_back();
-                            json_code += "\n" + string(tabs, '\t') + "},\n";
-                        }
-                        
+                        while(json_code.back() != ',')json_code.pop_back();
+                        json_code.pop_back();
+                        json_code += "\n" + string(tabs + 1, '\t') + "},\n";
+                    }
+                    if (!before_set.empty() && closing_tag == before_set.top())
+                    {
+                        prev_before_set.push(before_set.top());
+                        before_set.pop();
+                        while (json_code.back() != ',')json_code.pop_back();
+                        json_code.pop_back();
+                        json_code += "\n" + string(tabs, '\t') + "],\n";
+                    }
+                    else if (!prev_before_set.empty() && closing_tag == prev_before_set.top())
+                    {
+                        json_code += string(tabs, '\t') + "],\n";
+                    }
+                    else if (!prev_before_set.empty() && closing_tag != prev_before_set.top()) 
+                    {
+                        if (!prev_before_set.empty())prev_before_set.pop();
                     }
                 }
+                
             }
             else {
                 int spacePos = tagContent.find(' ');
@@ -97,7 +110,7 @@ void Xml_to_Json(const string& input, const string& output) {
 
                 vector<string>& parent = parents_tag.top();
                 parent.push_back(tag_name);
-                repeated_tags.push_back(tag_name);
+                
                 if (selfClosing)
                 {
                     json_code += string(tabs, '\t') + "\"" + tag_name + "\": null,\n";
@@ -107,19 +120,47 @@ void Xml_to_Json(const string& input, const string& output) {
                     if (!same_line )
                     {
                         no_of_tags = count(parent.begin(), parent.end(), tag_name);
+                        if (no_of_tags == 2)
+                        {
+                            while (true) 
+                            {
+                                int t = 0;
+                                while (!tags.empty() && t == 2)
+                                {
+                                    if (!tags.empty())
+                                    {
+                                        if (tag_name == tags.top())t++;
+                                        temp.push(tags.top());
+                                        tags.pop();
+                                    }
+                                }
+                                if (!tags.empty())before_array.push(tags.top());
+                                while (!temp.empty())
+                                {
+                                    tags.push(temp.top());
+                                    temp.pop();
+                                }
+                                break;
+                            }
+                            string s = "\"" + tag_name + "\": ";
+                            int x = json_code.rfind(s);
+                            json_code = json_code.substr(0, x + tag_name.size() + 4) + "[\n"
+                                + string(tabs + 1, '\t') + json_code.substr(x + tag_name.size() + 4);
+                            before_set.push(tag_name);
+                        }
+                        else if (!prev_before_set.empty() && tag_name == prev_before_set.top())
+                        {
+                            while(json_code.back() != '}')json_code.pop_back();
+                            json_code += ", \n";
+                        }
                         
-                        if (no_of_tags == 1 || tag_name.back() == 's')
+                        if (no_of_tags == 1 )
                         {
                             json_code += string(tabs, '\t') + "\"" + tag_name + "\": {\n";
                         }
-                        else if (parent[parent.size() - 2] == tag_name + "s")
-                        {
-                            json_code.pop_back();
-                            json_code += string(tabs, '\t') + "\"" + tag_name + "\": [\n";
-                        }
                         else
                         {
-                            json_code += string(tabs + 1, '\t') + "{\n";
+                            json_code += string(tabs + 1 , '\t') + "{\n";
                         }
 
                         tags.push(tag_name);
@@ -138,7 +179,6 @@ void Xml_to_Json(const string& input, const string& output) {
                 {
                     json_code += string(tabs, '\t') + "\"" + tag_name + "\": \"" + content + "\",\n";
                 }
-                
             }
             
         }
