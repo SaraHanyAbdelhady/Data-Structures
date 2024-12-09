@@ -48,10 +48,11 @@ void Xml_to_Json(const string& input, const string& output) {
     stack<string> before_set;
     parents_tag.push({});
     stack<string> prev_before_set;
-    bool close = true, set = false;
+    bool close = true;
     stack<string> temp;
     stack<string> before_array;
-
+    stack<bool> set;
+    set.push(false);
 
     while (getline(inputFile, line)) {
         int start_of_tag = line.find('<');
@@ -82,10 +83,13 @@ void Xml_to_Json(const string& input, const string& output) {
                             {
                                 json_code += ", \n";
                             }
-                            else json_code += "\n" + string(tabs-- + 1, '\t') + "],\n";
+                            else {
+                                if (set.top())set.pop();
+                                json_code += "\n" + string(tabs + 2, '\t') + "],\n";
+                                
+                            }
                         }
                         before_array.pop();
-                        set = false;
                     }
                     if (!close)
                     {
@@ -96,7 +100,7 @@ void Xml_to_Json(const string& input, const string& output) {
                     {
                         while (json_code.back() != ',')json_code.pop_back();
                         json_code.pop_back();
-                        json_code += "\n" + string(tabs + 1, '\t') + "},\n";
+                        json_code += "\n" + string(set.top() ? tabs + 2 : tabs + 1, '\t') + "},\n";
                     }
                     if (!before_set.empty() && closing_tag == before_set.top())
                     {
@@ -104,13 +108,13 @@ void Xml_to_Json(const string& input, const string& output) {
                         before_set.pop();
                         while (json_code.back() != ',')json_code.pop_back();
                         json_code.pop_back();
-                        json_code += "\n" + string(tabs + 1, '\t') + "],\n";
-                        set = false;
+                        if (set.top())set.pop();
+                        json_code += "\n" + string((set.top() )? tabs + 2 : tabs + 1, '\t') + "],\n";
                     }
                     else if (!prev_before_set.empty() && closing_tag == prev_before_set.top())
                     {
-                        json_code += string(tabs + 1, '\t') + "],\n";
-                        set = false;
+                        if (set.top())set.pop();
+                        json_code += string(set.top() ? tabs + 2 : tabs + 1, '\t') + "],\n";
                     }
                     else if (!prev_before_set.empty() && closing_tag != prev_before_set.top())
                     {
@@ -131,7 +135,7 @@ void Xml_to_Json(const string& input, const string& output) {
 
                 if (selfClosing)
                 {
-                    json_code += string(tabs + 1, '\t') + "\"" + tag_name + "\": null,\n";
+                    json_code += string(set.top() ? tabs + 2 : tabs + 1, '\t') + "\"" + tag_name + "\": "",\n";
                 }
                 else
                 {
@@ -162,24 +166,32 @@ void Xml_to_Json(const string& input, const string& output) {
                             }
                             string s = "\"" + tag_name + "\": ";
                             int x = json_code.rfind(s);
+                            string y = json_code.substr(x + tag_name.size() + 4);
                             json_code = json_code.substr(0, x + tag_name.size() + 4) + "[\n"
-                                + string(tabs + 1, '\t') + json_code.substr(x + tag_name.size() + 4);
+                                + string(tabs + 1, '\t') ;
+                            int start = 0;
+                            int end;
+                            while ((end = y.find('\n', start)) != -1) {
+                                json_code += "\t" + y.substr(start, end - start) + "\n";
+                                start = end + 1;
+                            }
                             before_set.push(tag_name);
-                            set = true;
+                            set.push(true);
                         }
                         else if (!prev_before_set.empty() && tag_name == prev_before_set.top())
                         {
                             while (json_code.back() != '}')json_code.pop_back();
+                            set.push(true);
                             json_code += ", \n";
                         }
 
                         if (no_of_tags == 1)
                         {
-                            json_code += string(tabs + 1, '\t') + "\"" + tag_name + "\": {\n";
+                            json_code += string(set.top() ? tabs + 2 : tabs + 1, '\t') + "\"" + tag_name + "\": {\n";
                         }
                         else
                         {
-                            json_code += string(tabs + 1, '\t') + "{\n";
+                            json_code += string(set.top() ? tabs + 2 : tabs + 1, '\t') + "{\n";
                         }
 
                         tags.push(tag_name);
@@ -196,7 +208,7 @@ void Xml_to_Json(const string& input, const string& output) {
                 string content = line.substr(contentStart, contentEnd - contentStart);
                 if (!content.empty())
                 {
-                    json_code += string(tabs + 1, '\t') + "\"" + tag_name + "\": \"" + content + "\",\n";
+                    json_code += string(set.top()?tabs + 2:tabs + 1, '\t') + "\"" + tag_name + "\": \"" + content + "\",\n";
                 }
             }
 
@@ -221,7 +233,7 @@ void Xml_to_Json(const string& input, const string& output) {
             not_tags += "\", ";
             json_code.pop_back();
             json_code.pop_back();
-            json_code += "\t" ;
+            //if(set.top())json_code += "\t" ;
             json_code += not_tags;
         }
     }
@@ -238,8 +250,8 @@ void Xml_to_Json(const string& input, const string& output) {
 }
 
 int main() {
-    string inputFilePath = "../../Test_samples/Xml_to_Json/sample.xml";
-    string outputFilePath = "../../Test_samples/Xml_to_Json/output_file_json.json";
+    string inputFilePath = "../../Test_samples/Xml_to_Json/sample3.xml";
+    string outputFilePath = "../../Test_samples/Xml_to_Json/output_file_json3.json";
     Xml_to_Json(inputFilePath, outputFilePath);
     return 0;
 }
