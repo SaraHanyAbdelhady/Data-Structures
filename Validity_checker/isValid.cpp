@@ -12,19 +12,19 @@ using namespace std;
 stack <pair<string,long long>>unClosed;
 stack <pair<string,long long>>unOpened;
 
-   void isValid(const string& input) {
+   bool isValid(const string& input) {
     ifstream inputFile(input);
    
     if (input.empty())
     {
         cout << "The input file path " << input << "is empty. Please provide a valid file.\n";
-        return;
+        return false;
     }
     
     if (!inputFile.is_open())
     {
         cout << "Unable to open input file: " << input << endl;
-        return;
+        return false;
     }
 
      string inputStream;
@@ -114,7 +114,7 @@ unOpened.push(make_pair(closings.front().first,closings.front().second));
 closings.pop();
 }
      inputFile.close();
-     return;
+     return unClosed.empty()&&unOpened.empty();
 
 
    

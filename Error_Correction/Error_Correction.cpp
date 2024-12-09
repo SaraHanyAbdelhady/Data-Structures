@@ -42,7 +42,13 @@ void errorCorrection(const string& input) {
 
   int main(){
    cout << "Starting tag validation..." << endl;
-    isValid("../sample4.xml");
+    bool validity=isValid("../sample4.xml");
+    if(validity){
+        cout<<"File is Valid"<<"\n";
+    }
+    else{
+         cout<<"File is inValid"<<"\n";
+    }
 
     cout << "Unclosed tags:" << endl;
     while (!unClosed.empty()) {
