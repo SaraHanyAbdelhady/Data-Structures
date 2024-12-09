@@ -28,9 +28,7 @@ stack <pair<string,long long>>unOpened;
     }
 
      string inputStream;
-
      stack<pair<string,long long>> openings;
-
      queue <pair<string,long long>> closings;
      
 
@@ -38,7 +36,8 @@ stack <pair<string,long long>>unOpened;
      while(getline(inputFile,inputStream)){
         counter++;
       for(long long i=0; i<inputStream.size();){
-        if(inputStream[i] == '<'  && inputStream[i+1] != '/') {
+    if (inputStream[i] == '<' && (i + 1 < inputStream.size()) && inputStream[i + 1] != '/')
+      {
             string tagOpen="";
             i++;
             while(inputStream[i]!='>' && inputStream[i]!=' '){
@@ -50,7 +49,8 @@ stack <pair<string,long long>>unOpened;
            
           
         }
-        else if(inputStream[i] == '<' && inputStream[i+1] == '/'){
+        else if (inputStream[i] == '<' && (i + 1 < inputStream.size()) && inputStream[i + 1] == '/')
+{
             string tagClose="";
             i++;
             i++;
@@ -69,10 +69,10 @@ stack <pair<string,long long>>unOpened;
        
      }
 
-   long long quSze= closings.size();
-     while(!openings.empty()){
-bool flag=0;
 
+     while(!openings.empty()){
+    bool flag=0;
+   long long quSze= closings.size();
    while((quSze--)&&(!closings.empty()))
 {
 if(openings.top().first==closings.front().first)
@@ -109,10 +109,10 @@ openings.pop();
     //      }
      
    
-//    while(!closings.empty()){
-// unOpened.push(make_pair(closings.front().first,closings.front().second));
-// closings.pop();
-// }
+   while(!closings.empty()){
+unOpened.push(make_pair(closings.front().first,closings.front().second));
+closings.pop();
+}
      inputFile.close();
      return;
 
@@ -120,24 +120,24 @@ openings.pop();
    
    }
 
-  int main() {
-    cout << "Starting tag validation..." << endl;
-    isValid("../sample4.xml");
+//   int main() {
+//     cout << "Starting tag validation..." << endl;
+//     isValid("../sample4.xml");
 
-    cout << "Unclosed tags:" << endl;
-    while (!unClosed.empty()) {
-        cout << unClosed.top().first << " " << unClosed.top().second << endl;
-        unClosed.pop();
-    }
+//     cout << "Unclosed tags:" << endl;
+//     while (!unClosed.empty()) {
+//         cout << unClosed.top().first << " " << unClosed.top().second << endl;
+//         unClosed.pop();
+//     }
 
-    // cout << "Unopened tags:" << endl;
-    // while (!unOpened.empty()) {
-    //     cout << unOpened.top().first << " " << unOpened.top().second << endl;
-    //     unOpened.pop();
-    // }
+//     cout << "Unopened tags:" << endl;
+//     while (!unOpened.empty()) {
+//         cout << unOpened.top().first << " " << unOpened.top().second << endl;
+//         unOpened.pop();
+//     }
 
-    return 0;
-}
+//     return 0;
+// }
 
 
   

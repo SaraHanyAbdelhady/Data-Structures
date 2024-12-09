@@ -41,15 +41,19 @@ void errorCorrection(const string& input) {
 }
 
   int main(){
+   cout << "Starting tag validation..." << endl;
     isValid("../sample4.xml");
-       while(!unClosed.empty()){
-            cout<<unClosed.top().first<<" "<<unClosed.top().second<<endl;
-           unClosed.pop();
-         }
 
-             while(!unOpened.empty()){
-            cout<<unOpened.top().first<<" "<<unOpened.top().second<<endl;
-           unOpened.pop();
-         }
+    cout << "Unclosed tags:" << endl;
+    while (!unClosed.empty()) {
+        cout << unClosed.top().first << " " << unClosed.top().second << endl;
+        unClosed.pop();
+    }
+
+    cout << "Unopened tags:" << endl;
+    while (!unOpened.empty()) {
+        cout << unOpened.top().first << " " << unOpened.top().second << endl;
+        unOpened.pop();
+    }
 
    }
