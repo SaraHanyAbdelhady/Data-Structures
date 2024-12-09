@@ -9,7 +9,8 @@
 
 using namespace std;
 
-stack <pair<string,long long>> indices;
+stack <pair<string,long long>>unClosed;
+stack <pair<string,long long>>unOpened;
 
    void isValid(const string& input) {
     ifstream inputFile(input);
@@ -71,9 +72,10 @@ stack <pair<string,long long>> indices;
    long long quSze= closings.size();
      while(!openings.empty()){
 bool flag=0;
+
    while((quSze--)&&(!closings.empty()))
 {
-if(openings.top()==closings.front())
+if(openings.top().first==closings.front().first)
 {
    openings.pop();
    closings.pop();
@@ -88,9 +90,10 @@ closings.push(make_pair(st,num));
 }
 }
 if(!flag){
-indices.push(make_pair(openings.top().first,openings.top().second));
+unClosed.push(make_pair(openings.top().first,openings.top().second));
 openings.pop();
 }
+
      }
 
 
@@ -104,14 +107,12 @@ openings.pop();
     //         cout<<closings.front().first<<" "<<closings.front().second<<endl;
     //        closings.pop();
     //      }
-          
-        // while(!indices.empty()){
-        //     cout<<indices.top().first<<" "<<indices.top().second<<endl;
-        //    indices.pop();
-        //  }
-          
+     
    
-   
+//    while(!closings.empty()){
+// unOpened.push(make_pair(closings.front().first,closings.front().second));
+// closings.pop();
+// }
      inputFile.close();
      return;
 
@@ -119,8 +120,25 @@ openings.pop();
    
    }
 
-//    int main(){
-//     isValid("../sample4.xml");
-//    }
+  int main() {
+    cout << "Starting tag validation..." << endl;
+    isValid("../sample4.xml");
+
+    cout << "Unclosed tags:" << endl;
+    while (!unClosed.empty()) {
+        cout << unClosed.top().first << " " << unClosed.top().second << endl;
+        unClosed.pop();
+    }
+
+    // cout << "Unopened tags:" << endl;
+    // while (!unOpened.empty()) {
+    //     cout << unOpened.top().first << " " << unOpened.top().second << endl;
+    //     unOpened.pop();
+    // }
+
+    return 0;
+}
+
 
   
+

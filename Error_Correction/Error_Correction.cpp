@@ -42,9 +42,14 @@ void errorCorrection(const string& input) {
 
   int main(){
     isValid("../sample4.xml");
-       while(!indices.empty()){
-            cout<<indices.top().first<<" "<<indices.top().second<<endl;
-           indices.pop();
+       while(!unClosed.empty()){
+            cout<<unClosed.top().first<<" "<<unClosed.top().second<<endl;
+           unClosed.pop();
+         }
+
+             while(!unOpened.empty()){
+            cout<<unOpened.top().first<<" "<<unOpened.top().second<<endl;
+           unOpened.pop();
          }
 
    }
