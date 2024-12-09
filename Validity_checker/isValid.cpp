@@ -30,11 +30,12 @@ using namespace std;
      queue<string> closings;
      stack<long long> indices;
      
-     int end_of_tag_att = -1; //<Name>Amany</Name>
+      //<Name>Amany</Name>
     long long counter = 0;
      while(getline(inputFile,inputStream)){
         counter++;
       for(long long i=0; i<inputStream.size();){
+        cout<<inputStream.size();
         if(inputStream[i] == '<'  && inputStream[i+1] != '/') {
             string tagOpen="";
             i++;
@@ -42,9 +43,9 @@ using namespace std;
                 tagOpen+=inputStream[i];
                 i++;
             }
-            
+             i++;
             openings.push(make_pair(tagOpen,counter));
-            i++;
+           
           
         }
         else if(inputStream[i] == '<' && inputStream[i+1] == '/'){
@@ -55,17 +56,22 @@ using namespace std;
                 tagClose+=inputStream[i];
                 i++;
             }
-            
-            openings.push(make_pair(tagClose,counter));
             i++;
+            openings.push(make_pair(tagClose,counter));
+            
         }
         else i++;
       }
-
-          cout<<openings.top().first<<" "<<openings.top().second<<endl;
+         
      
        
      }
+
+     while(!openings.empty()){
+            cout<<openings.top().first<<" "<<openings.top().second<<endl;
+            openings.pop();
+         }
+          
 
      inputFile.close();
      return;
@@ -75,7 +81,7 @@ using namespace std;
    }
 
    int main(){
-    isValid("../sample.xml");
+    isValid("../sample4.xml");
    }
 
   
