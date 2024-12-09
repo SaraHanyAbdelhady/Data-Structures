@@ -1,5 +1,5 @@
-﻿  Source.cpp
-C:\Users\Dell\Documents\GitHub\Data-Structures\Xml_to_Json\Xml_to_Json\Source.cpp(52,26): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Dell\Documents\GitHub\Data-Structures\Xml_to_Json\Xml_to_Json\Source.cpp(52,75): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Dell\Documents\GitHub\Data-Structures\Xml_to_Json\Xml_to_Json\Source.cpp(189,31): warning C4018: '<': signed/unsigned mismatch
+﻿  Xml_Json.cpp
+C:\Users\Dell\Documents\GitHub\Data-Structures\Xml_to_Json\Xml_to_Json\Xml_Json.cpp(62,26): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Dell\Documents\GitHub\Data-Structures\Xml_to_Json\Xml_to_Json\Xml_Json.cpp(62,75): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Dell\Documents\GitHub\Data-Structures\Xml_to_Json\Xml_to_Json\Xml_Json.cpp(208,31): warning C4018: '<': signed/unsigned mismatch
   Xml_to_Json.vcxproj -> C:\Users\Dell\Documents\GitHub\Data-Structures\Xml_to_Json\Debug\Xml_to_Json.exe

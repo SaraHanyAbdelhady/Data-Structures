@@ -1,0 +1,47 @@
+<library>
+    <book>
+        <title>Book One</title>
+        <author>Author A</author>
+        <year>2020</year>
+        <genres>
+            <genre>
+		Fiction
+	    </genre>
+            <genre>
+		Adventure
+	    </genre>
+        </genres>
+    </book>
+    <book>
+        <title>Book Two</title>
+        <author>Author B</author>
+        <year>2018</year>
+        <genres>
+            <genre>
+		Science Fiction
+	   </genre>
+            <genre>
+		Drama
+	    </genre>
+        </genres>
+    </book>
+    <magazine>
+        <title>Magazine One</title>
+        <issue>January 2023</issue>
+        <articles>
+            <article>
+                <title>Technology Trends</title>
+                <author>Author C</author>
+            </article>
+            <article>
+                <title>Health Tips</title>
+                <author>Author D</author>
+            </article>
+        </articles>
+    </magazine>
+    <magazine>
+        <title>Magazine Two</title>
+        <issue>February 2023</issue>
+    </magazine>
+</library>
+

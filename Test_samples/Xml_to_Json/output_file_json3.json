@@ -1,0 +1,49 @@
+{
+	"company": {
+		"department": [
+		{
+			"employee": [
+			{
+				"name": "John Doe",
+				"position": "Software Engineer",
+				"skills": {
+					"skill": [
+						"Python", 
+						"C++"
+					]
+				}
+			},
+			{
+				"name": "Jane Smith",
+				"position": "DevOps Engineer",
+				"skills": {
+					"skill": [
+						"Cloud Computing", 
+						"Automation"
+					]
+				}
+			}
+			]
+		},
+		{
+			"employee": {
+				"name": "Mark Wilson",
+				"position": "Content Strategist"
+			}
+		}
+		],
+		"projects": {
+			"project": [
+			{
+				"title": "Project Alpha",
+				"manager": "John Doe"
+			},
+			{
+				"title": "Project Beta",
+				"manager": "Jane Smith",
+				"description": null
+			}
+			]
+		}
+	}
+}
