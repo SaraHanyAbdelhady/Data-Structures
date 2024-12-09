@@ -1,9 +1,12 @@
-<users>
-<user>
+<users></users>
+<user></user>
 <id>
 1
 </id>
 </blue>
+</purple>
+<blue>
+</grey><grey>
 <name>
 A
 h
@@ -15,4 +18,4 @@ A
 l
 i
 </name>
-<posts>
+<posts></posts>
