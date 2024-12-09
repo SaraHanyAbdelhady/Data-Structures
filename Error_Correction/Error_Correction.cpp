@@ -4,12 +4,13 @@
 #include <stack>
 #include <vector>
 #include <algorithm>
+#include "../Validity_checker/isValid.h"
 
 using namespace std;
 
-void Xml_to_Json(const string& input, const string& output) {
+void errorCorrection(const string& input) {
     ifstream inputFile(input);
-    ofstream outputFile(output);
+   
     if (input.empty())
     {
         cout << "The input file path " << input << "is empty. Please provide a valid file.\n";
@@ -25,13 +26,25 @@ void Xml_to_Json(const string& input, const string& output) {
         cout << "Unable to open input file: " << input << endl;
         return;
     }
-    if (!outputFile.is_open())
-    {
-        cout << "Unable to open output file: " << output << endl;
-        return;
-    }
-
+    // if (!outputFile.is_open())
+    // {
+    //     cout << "Unable to open output file: " << output << endl;
+    //     return;
+    // }
+        
+     
 
     inputFile.close();
-    outputFile.close();
+    // outputFile.close();
+
+
 }
+
+  int main(){
+    isValid("../sample4.xml");
+       while(!indices.empty()){
+            cout<<indices.top().first<<" "<<indices.top().second<<endl;
+           indices.pop();
+         }
+
+   }

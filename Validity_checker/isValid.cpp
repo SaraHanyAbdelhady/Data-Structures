@@ -5,10 +5,11 @@
 #include <vector>
 #include <algorithm>
 #include <queue>
+#include "isValid.h"
 
 using namespace std;
 
-
+stack <pair<string,long long>> indices;
 
    void isValid(const string& input) {
     ifstream inputFile(input);
@@ -26,16 +27,16 @@ using namespace std;
     }
 
      string inputStream;
+
      stack<pair<string,long long>> openings;
-     queue<string> closings;
-     stack<long long> indices;
+
+     queue <pair<string,long long>> closings;
      
-      //<Name>Amany</Name>
+
     long long counter = 0;
      while(getline(inputFile,inputStream)){
         counter++;
       for(long long i=0; i<inputStream.size();){
-        cout<<inputStream.size();
         if(inputStream[i] == '<'  && inputStream[i+1] != '/') {
             string tagOpen="";
             i++;
@@ -57,7 +58,7 @@ using namespace std;
                 i++;
             }
             i++;
-            openings.push(make_pair(tagClose,counter));
+           closings.push(make_pair(tagClose,counter));
             
         }
         else i++;
@@ -67,12 +68,50 @@ using namespace std;
        
      }
 
+   long long quSze= closings.size();
      while(!openings.empty()){
-            cout<<openings.top().first<<" "<<openings.top().second<<endl;
-            openings.pop();
-         }
-          
+bool flag=0;
+   while((quSze--)&&(!closings.empty()))
+{
+if(openings.top()==closings.front())
+{
+   openings.pop();
+   closings.pop();
+   flag=1;
+   break;
 
+}else{
+string st=closings.front().first;
+long long num=closings.front().second;
+closings.pop();
+closings.push(make_pair(st,num));
+}
+}
+if(!flag){
+indices.push(make_pair(openings.top().first,openings.top().second));
+openings.pop();
+}
+     }
+
+
+    //  while(!openings.empty()){
+    //         cout<<openings.top().first<<" "<<openings.top().second<<endl;
+    //         openings.pop();
+    //      }
+
+
+    //        while(!closings.empty()){
+    //         cout<<closings.front().first<<" "<<closings.front().second<<endl;
+    //        closings.pop();
+    //      }
+          
+        // while(!indices.empty()){
+        //     cout<<indices.top().first<<" "<<indices.top().second<<endl;
+        //    indices.pop();
+        //  }
+          
+   
+   
      inputFile.close();
      return;
 
@@ -80,8 +119,8 @@ using namespace std;
    
    }
 
-   int main(){
-    isValid("../sample4.xml");
-   }
+//    int main(){
+//     isValid("../sample4.xml");
+//    }
 
   
