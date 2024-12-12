@@ -15,5 +15,3 @@ using namespace std;
 void Xml_to_Json(const string& input, const string& output);
 
 #endif // _XML_TO_JSON_H
-
-
