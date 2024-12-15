@@ -26,7 +26,8 @@ vector <pair<long long,string>>unOpened;
         cout << "Unable to open input file: " << input << endl;
         return false;
     }
-
+// unClosed.clear();
+unOpened.clear();
      string inputStream;
      stack<pair<string,long long>> openings;
      queue <pair<string,long long>> closings;
@@ -36,7 +37,7 @@ vector <pair<long long,string>>unOpened;
      while(getline(inputFile,inputStream)){
         counter++;
       for(long long i=0; i<inputStream.size();){
-    if (inputStream[i] == '<' && (i + 1 < inputStream.size()) && inputStream[i + 1] != '/')
+    if (inputStream[i] == '<' && (i + 1 < inputStream.size()) && inputStream[i + 1] != '/'&&inputStream[i + 1] != '!')
       {
             string tagOpen="";
             i++;
@@ -114,6 +115,10 @@ unOpened.push_back(make_pair(closings.front().second,closings.front().first));
 closings.pop();
 }
      inputFile.close();
+     if(!unClosed.empty())
+     cout<<"Unclosed not empty"<<"\n";
+         if(!unOpened.empty())
+     cout<<"UnOpened not empty"<<"\n";
      return unClosed.empty()&&unOpened.empty();
 
 

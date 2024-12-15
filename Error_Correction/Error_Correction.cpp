@@ -44,7 +44,7 @@ void errorCorrection(const string& input , const string& output) {
         counter++;
       for(long long i=0; i<inputStream.size();){
     if (inputStream[i] == '<' && (i + 1 < inputStream.size()) && inputStream[i + 1] != '/')
-      {     
+      {    
             outputFile << inputStream[i];
             string tagOpen="";
         
@@ -53,6 +53,13 @@ void errorCorrection(const string& input , const string& output) {
                 outputFile << inputStream[i];
                 tagOpen+=inputStream[i];
                 i++;
+            }
+            if(inputStream[i]==' ')
+          {   while(inputStream[i]!='>')
+           { 
+        outputFile << inputStream[i];
+        i++;
+            }
             }
             outputFile<<inputStream[i];
             
@@ -65,7 +72,7 @@ void errorCorrection(const string& input , const string& output) {
              i++;
             //openings.push(make_pair(tagOpen,counter));
            
-          
+          outputFile<<"\n";
         }
         else if (inputStream[i] == '<' && (i + 1 < inputStream.size()) && inputStream[i + 1] == '/')
 {  
@@ -97,13 +104,13 @@ void errorCorrection(const string& input , const string& output) {
             }
             outputFile<<"</"+tagClose+">";
            closings.push(make_pair(tagClose,counter));
-            
+          outputFile<<"\n";  
         }
         else{
             outputFile<<inputStream[i];
             i++;
         }
-        outputFile<<"\n";
+        
       }
          
      
@@ -114,7 +121,11 @@ void errorCorrection(const string& input , const string& output) {
 }
 
   int main(){
-   cout<<isValid("Test_samples/Xml_to_json/sample4.xml")<<"\n";
-   errorCorrection("Test_samples/Xml_to_json/sample4.xml", "sample4Soln.txt");
+   cout<<isValid("../Test_samples/Xml_to_json/sample4.xml")<<"\n";
+   errorCorrection("../Test_samples/Xml_to_json/sample4.xml", "sample4Soln.txt");
+
+   
+     cout<<isValid("sample4Soln.txt")<<"\n";
+   
 
    }

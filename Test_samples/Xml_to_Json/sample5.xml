@@ -9,7 +9,7 @@
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                 </body>
                 <topics>
-		    <!-- Comment Here-->
+	
                     <topic>
                         economy
                     </topic>
@@ -30,7 +30,7 @@
             </post>
         </posts>
         <followers>
-	    <!-- Comment Here-->
+	
             <follower>
                 <id>2</id>
             </follower>
@@ -61,7 +61,7 @@
         </followers>
     </user>
     <user>
-	<!-- Comment Here-->
+
         <id>3</id>
         <name>Mohamed Sherif</name>
         <posts>
