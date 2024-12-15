@@ -1,50 +1,50 @@
 {
 	"library": {
 		"book": [
-		{
-			"title": "Book One",
-			"author": "Author A",
-			"year": "2020",
-			"genres": {
-				"genre": [
-					"Fiction", 
-					"Adventure"
-				]
-			}
-		},
-		{
-			"title": "Book Two",
-			"author": "Author B",
-			"year": "2018",
-			"genres": {
-				"genre": [
+			{
+				"title": "Book One",
+				"author": "Author A",
+				"year": "2020",
+				"genres": {
+					"genre": [
+						"Fiction", 
+						"Adventure"
+					]
+				}
+			},
+			{
+				"title": "Book Two",
+				"author": "Author B",
+				"year": "2018",
+				"genres": {
+					"genre": [
 					"Science Fiction", 
 					"Drama"
-				]
+					]
+				}
 			}
-		}
 		],
 		"magazine": [
-		{
-			"title": "Magazine One",
-			"issue": "January 2023",
-			"articles": {
-				"article": [
-				{
-					"title": "Technology Trends",
-					"author": "Author C"
-				},
-				{
-					"title": "Health Tips",
-					"author": "Author D"
+			{
+				"title": "Magazine One",
+				"issue": "January 2023",
+				"articles": {
+					"article": [
+						{
+							"title": "Technology Trends",
+							"author": "Author C"
+						},
+						{
+							"title": "Health Tips",
+							"author": "Author D"
+						}
+					]
 				}
-				]
+			},
+			{
+				"title": "Magazine Two",
+				"issue": "February 2023"
 			}
-		},
-		{
-			"title": "Magazine Two",
-			"issue": "February 2023"
-		}
 		]
 	}
 }
