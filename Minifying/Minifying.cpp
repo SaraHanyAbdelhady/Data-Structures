@@ -29,12 +29,12 @@
  void Minifying(ifstream &input_file, ofstream &output_file)
  {
     bool in_comment=false,in_tag=false,between_tags=false,notext=false;
-    int notext_counter=0;
+    int notext_counter=0,text_detected,prsrv;
     string line;
     while (getline(input_file, line))
     {
-        //remove indentation from extracted line
-        remove_indentation(line);
+        text_detected=0;
+
         //loop on every character in the line
         for(int i=0;i<line.length();i++)
         {
@@ -82,7 +82,42 @@
             //skip comments
             if(in_comment)
                 continue;
-            output_file<<line[i];
+             if(between_tags)
+            {
+                prsrv=i;
+                //i++;
+                while(i < line.length() &&line[i]!='<')
+                    {
+                        if(line[i]==' '||line[i]=='\n'|| line[i]=='\r'||line[i]=='\t')
+                            {
+                                i++;
+                            }
+                        else
+                        {
+                            text_detected=1;
+                            break;
+                        }
+
+                    }
+            }
+            if(between_tags)
+            {
+                            i=prsrv;
+            }
+            if(text_detected==0)
+            {
+                //remove indentation from extracted line
+                remove_indentation(line);
+                output_file<<line[i];
+            }
+            else
+            {
+
+                output_file<<line[i];
+            }
+
+
+
         }
     }
  }
