@@ -31,7 +31,7 @@ void formatXML(const string& inputFile, const string& outputFile) {
         outFile << string(indentLevel * indent.length(), ' ') << line << "\n";
 
         // If the line is an opening tag and not a self-closing tag, increase the indentation level
-        if (line[0] == '<' && line[line.length() - 1] != '/' && line[1] != '?' && line.find("</") == string::npos) {
+        if (line[0] == '<' && line[line.length() - 1] != '/' && line.find("</") == string::npos) {
             indentLevel++;
         }
     }
