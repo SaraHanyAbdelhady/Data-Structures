@@ -7,7 +7,7 @@
 using namespace std;
 
 extern stack<pair<string, long long>> unClosed; // Declaration of global variable
-extern stack<pair<string, long long>> unOpened;
+extern vector<pair<long long, string>> unOpened;
 bool isValid(const string& input);            // Declaration of function
 
 #endif

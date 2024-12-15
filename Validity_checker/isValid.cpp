@@ -10,7 +10,7 @@
 using namespace std;
 
 stack <pair<string,long long>>unClosed;
-stack <pair<string,long long>>unOpened;
+vector <pair<long long,string>>unOpened;
 
    bool isValid(const string& input) {
     ifstream inputFile(input);
@@ -75,7 +75,7 @@ stack <pair<string,long long>>unOpened;
    long long quSze= closings.size();
    while((quSze--)&&(!closings.empty()))
 {
-if(openings.top().first==closings.front().first)
+if(openings.top().first==closings.front().first && openings.top().second<=closings.front().second)
 {
    openings.pop();
    closings.pop();
@@ -110,7 +110,7 @@ openings.pop();
      
    
    while(!closings.empty()){
-unOpened.push(make_pair(closings.front().first,closings.front().second));
+unOpened.push_back(make_pair(closings.front().second,closings.front().first));
 closings.pop();
 }
      inputFile.close();

@@ -3,10 +3,10 @@
 <id>
 1
 </id>
-</blue>
-</purple>
-<blue>
-</grey><grey>
+<blue></blue>
+<purple></purple>
+<blue></blue>
+<grey></grey>
 <name>
 A
 h

@@ -36,6 +36,8 @@ void errorCorrection(const string& input , const string& output) {
      stack<pair<string,long long>> openings;
      queue <pair<string,long long>> closings;
      
+     sort(unOpened.begin(),unOpened.end());
+     long long index = 0;
 
     long long counter = 0;
      while(getline(inputFile,inputStream)){
@@ -74,25 +76,26 @@ void errorCorrection(const string& input , const string& output) {
     //             outputFile<<open;
     //             unOpened.pop();
     //         }
-            outputFile<<inputStream[i];
-            outputFile<<inputStream[i+1];
+            // outputFile<<inputStream[i];
+            // outputFile<<inputStream[i+1];
             string tagClose="";
             i++;
             i++;
             while(inputStream[i]!='>'){
                 tagClose+=inputStream[i];
-                outputFile<<inputStream[i];
+                //outputFile<<inputStream[i];
                 i++;
             }
-             outputFile<<inputStream[i];
+             //outputFile<<inputStream[i];
             i++;
            
-            if(!unOpened.empty() && unOpened.top().first == tagClose && unOpened.top().second == counter){
+            if(index<unOpened.size() && unOpened[index].second == tagClose && unOpened[index].first == counter){
                 string open = "<" + tagClose + ">";
                  cout<<open<<endl;
                 outputFile<<open;
-                unOpened.pop();
+                index++;
             }
+            outputFile<<"</"+tagClose+">";
            closings.push(make_pair(tagClose,counter));
             
         }
@@ -111,7 +114,7 @@ void errorCorrection(const string& input , const string& output) {
 }
 
   int main(){
-   cout<<isValid("../Test_samples/Xml_to_Json/sample4.xml")<<"\n";
-   errorCorrection("../Test_samples/Xml_to_Json/sample4.xml", "../sample4Soln.txt");
+   cout<<isValid("Test_samples/Xml_to_json/sample4.xml")<<"\n";
+   errorCorrection("Test_samples/Xml_to_json/sample4.xml", "sample4Soln.txt");
 
    }
