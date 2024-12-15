@@ -22,14 +22,6 @@ void formatXML(const string& inputFile, const string& outputFile) {
     const string indent = "    "; // 4 spaces for indentation
 
     while (getline(inFile, line)) {
-        // Remove leading and trailing spaces from the line
-        line.erase(0, line.find_first_not_of(" \t"));
-        line.erase(line.find_last_not_of(" \t") + 1);
-
-        if (line.empty()) {
-            continue;
-        }
-
         // If the line is a closing tag, reduce the indentation level
         if (line[0] == '<' && line[1] == '/') {
             indentLevel = max(0, indentLevel - 1);
