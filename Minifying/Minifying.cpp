@@ -1,5 +1,7 @@
 #include <bits/stdc++.h>
  using namespace std;
+ //function to remove indentation
+ void remove_indentation(string& line);
  void Minifying(ifstream &input_file, ofstream &output_file)
  {
     bool in_comment=false,in_tag=false,between_tags=false,notext=false;
@@ -8,16 +10,7 @@
     while (getline(input_file, line))
     {
         //remove indentation from extracted line
-        int start = 0; //initialize variable start with 0
-        //if start didnt reach end of string and there is space or tab or new line or carriage return so skip that char
-        while (start < line.size() && (line[start] == ' ' || line[start] == '\t' || line[start] == '\n' || line[start] == '\r'))
-            start++;
-        int end = line.size(); //initialize end by size of string
-        //start from end and as long as you don't reach start so if you detect space or new line or carriage return or tab skip that char by decrementing end
-        while (end > start && (line[end - 1] == ' ' || line[end - 1] == '\t' || line[end - 1] == '\n' || line[end - 1] == '\r'))
-            end--;
-        //update the string with the new start and end
-        line = line.substr(start, end - start);
+        remove_indentation(line);
         //loop on every character in the line
         for(int i=0;i<line.length();i++)
         {
@@ -77,4 +70,17 @@
     file2.close();
     cout << "File minified successfully";
     return 0;
+ }
+ void remove_indentation(string& line)
+ {
+        int start = 0; //initialize variable start with 0
+        //if start didnt reach end of string and there is space or tab or new line or carriage return so skip that char
+        while (start < line.size() && (line[start] == ' ' || line[start] == '\t' || line[start] == '\n' || line[start] == '\r'))
+            start++;
+        int end = line.size(); //initialize end by size of string
+        //start from end and as long as you don't reach start so if you detect space or new line or carriage return or tab skip that char by decrementing end
+        while (end > start && (line[end - 1] == ' ' || line[end - 1] == '\t' || line[end - 1] == '\n' || line[end - 1] == '\r'))
+            end--;
+        //update the string with the new start and end
+        line = line.substr(start, end - start);
  }
