@@ -1,107 +1,98 @@
-#include <bits/stdc++.h>
- using namespace std;
- //function to remove indentation
- void remove_indentation(string& line);
- //Minifying function
- void Minifying(ifstream &input_file, ofstream &output_file);
- int main() {
-    ifstream file("input_file.xml");
-    ofstream file2("output_file.xml");
-    Minifying(file, file2);
-    file.close();
-    file2.close();
-    cout << "File minified successfully";
+#include "Minifying.h"
+int main()
+{
+    ifstream input_file("input_file.xml");
+    ofstream output_file("output_file.xml");
+    Minifying(input_file, output_file);
     return 0;
- }
- void remove_indentation(string& line)
- {
-        int start = 0; //initialize variable start with 0
-        //if start didnt reach end of string and there is space or tab or new line or carriage return so skip that char
-        while (start < line.size() && (line[start] == ' ' || line[start] == '\t' || line[start] == '\n' || line[start] == '\r'))
-            start++;
-        int end = line.size(); //initialize end by size of string
-        //start from end and as long as you don't reach start so if you detect space or new line or carriage return or tab skip that char by decrementing end
-        while (end > start && (line[end - 1] == ' ' || line[end - 1] == '\t' || line[end - 1] == '\n' || line[end - 1] == '\r'))
-            end--;
-        //update the string with the new start and end
-        line = line.substr(start, end - start);
- }
- void Minifying(ifstream &input_file, ofstream &output_file)
- {
-    bool in_comment=false,in_tag=false,between_tags=false,notext=false;
-    int notext_counter=0,text_detected,prsrv;
-    string line;
-    while (getline(input_file, line))
-    {
-
-        //loop on every character in the line
-        for(int i=0;i<line.length();i++)
-        {
-            text_detected=0;
-            //switch on that character
-            switch(line[i])
-            {
-                case'<':
-                        in_tag=true; //if you detect < so you are inside a tag
-                    //if you detect <!-- so you are inside a comment
-                    if(i+3<line.length()&&line[i+1]=='!'&&line[i+2]=='-'&&line[i+3]=='-')
-                    {
-                        in_comment=true;
-                        in_tag=true;
-                        //skip <!-- characters
-                        i+=2;
-                        continue;
-                    }
-                    break;
-                case'>':
-                    if(in_tag)
-                    {
-                        //if you were already in tag and then character became > so you are out of the tags and are now between tags
-                        in_tag=false;
-                        between_tags=true;
-                    }
-                    break;
-                case '-':
-                    //if you are inside comment and you detect --> so thats end of comment
-                    if(in_comment&&i+2<line.length()&&line[i+1]=='-'&&line[i+2]=='>')
-                    {
-                        in_comment=false;
-                        between_tags=true;
-                        in_tag=false;
-                        //skip -->
-                        i+=3;
-                        continue;
-                    }
-                    break;
+}
+void Minifying(ifstream& input_file, ofstream& output_file) {
+    stringstream buffer;
+    buffer << input_file.rdbuf();
+    string fileContent = buffer.str();
+    //Now we have all the content of input_file in the string fileContent
+    bool in_tag = false, in_comment = false; //flags to indicate inside tags and inside comment
+    queue<char> result; //queue to store the result to output it in file at the end
+    string content_between_tags; //string to preserve the content between tags > and <
+    //loop on every character in the file
+    for (size_t i = 0; i < fileContent.size(); ++i) {
+        char c = fileContent[i];
+        //if inside comment so skip it
+        if (in_comment) {
+            if (i + 2 < fileContent.size() && fileContent[i] == '-' && fileContent[i + 1] == '-' && fileContent[i + 2] == '>') {
+                in_comment = false;
+                i += 2; // to skip -->
             }
-            //skip comments
-            if(in_comment)
+            continue;
+        }
+        //if you detect < so you are inside tag
+        if (c == '<') {
+                //if < followed by !-- so its a comment
+            if (i + 3 < fileContent.size() && fileContent[i + 1] == '!' && fileContent[i + 2] == '-' && fileContent[i + 3] == '-')
+            {
+                in_comment = true;
+                i += 3; // Skip <!--
                 continue;
-             if(between_tags)
-            {
-                prsrv=i;
-                while(i < line.length() &&line[i]!='<')
-                    {
-                        if(line[i]==' '||line[i]=='\n'|| line[i]=='\r'||line[i]=='\t')
-                            i++;
-                        else
-                        {
-                            text_detected=1;
-                            break;
-                        }
+            }
+
+            // If there was content between tags and it only contains space or \n or \t or \r, remove it
+            if (!content_between_tags.empty()) // this condition check if there is anything between tags
+                {
+                    if (all_of(content_between_tags.begin(), content_between_tags.end(), ::isspace)) {
+                        // If only whitespace, don't add it to the result so do nothing
+                        //isspace is a function that checks if the string has whitespaces only or not
+                    }
+                    else
+                    { // that means there is non white space characters between tags so add all the content between tags to result as it is with no change
+                    for (char ch : content_between_tags)
+                        result.push(ch);
 
                     }
-                    i=prsrv;
-            }
-            if(text_detected==0)
+                    content_between_tags=""; //empty the string when you finish
+                }
+            //since you detected < so you are between tags
+            in_tag = true;
+            //add the character to result
+            result.push(c);
+        }
+        //if you detect > so set in_tag to false and add to result the >
+        else if (c == '>')
+        {
+            in_tag = false;
+            result.push(c);
+        }
+        //if you are inside tag so do not change anything, we leave what is between tags as it is
+        else if (in_tag)
+            result.push(c);
+        // if you do not detect < or > and you are not inside tags then you are between tags
+        else
+        {
+            //before adding what is between tags to result, we need to check if all content between tags is whitespace
+            // if that happens so we do not add anything between tags to result, if not so simply add the content just as it is with no change
+            // Check if content until the next < is all whitespace
+            int next_tag = fileContent.find('<', i);
+            if (next_tag != -1) //not equal -1 means found < because if it didnt find so it returns -1
             {
-                //remove indentation from extracted line
-                remove_indentation(line);
-                output_file<<line[i];
+                string between_tags = fileContent.substr(i, next_tag - i); //put content between the tags in string between_tags
+                if (all_of(between_tags.begin(), between_tags.end(), ::isspace)) {
+                    // If all content between tags is whitespace, only print the next < and do not print anything before it
+                    if (result.empty() || result.back() != '<') ;
+                }
+                else
+                {
+                    // Otherwise, print all content
+                   for (char ch : between_tags)
+                        result.push(ch);
+                }
+                i = next_tag - 1; //skip the content we added to result
             }
-            else
-                output_file<<line[i];
-
         }
     }
- }
+    //write result to output file
+    while (!result.empty())
+    {
+        output_file.put(result.front());
+        result.pop();
+    }
+}
+
