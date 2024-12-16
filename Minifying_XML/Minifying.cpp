@@ -6,7 +6,7 @@
  void Minifying(ifstream &input_file, ofstream &output_file);
  int main() {
     ifstream file("input_file.xml");
-    ofstream file2("Minified.xml");
+    ofstream file2("output_file.xml");
     Minifying(file, file2);
     file.close();
     file2.close();
@@ -33,28 +33,21 @@
     string line;
     while (getline(input_file, line))
     {
-        text_detected=0;
 
         //loop on every character in the line
         for(int i=0;i<line.length();i++)
         {
+            text_detected=0;
             //switch on that character
             switch(line[i])
             {
                 case'<':
-                    if(between_tags)
-                    {
-                        //if you were already between tags and then char became <
-                        //so you became inside tag not between tag
-                        between_tags=false;
-                        in_tag=true;
-                    }
-                    else
-                        in_tag=true; //if you weren't between tags so you only became inside tags and no need to make between tags to false
+                        in_tag=true; //if you detect < so you are inside a tag
                     //if you detect <!-- so you are inside a comment
                     if(i+3<line.length()&&line[i+1]=='!'&&line[i+2]=='-'&&line[i+3]=='-')
                     {
                         in_comment=true;
+                        in_tag=true;
                         //skip <!-- characters
                         i+=2;
                         continue;
@@ -73,6 +66,8 @@
                     if(in_comment&&i+2<line.length()&&line[i+1]=='-'&&line[i+2]=='>')
                     {
                         in_comment=false;
+                        between_tags=true;
+                        in_tag=false;
                         //skip -->
                         i+=3;
                         continue;
@@ -85,13 +80,10 @@
              if(between_tags)
             {
                 prsrv=i;
-                //i++;
                 while(i < line.length() &&line[i]!='<')
                     {
                         if(line[i]==' '||line[i]=='\n'|| line[i]=='\r'||line[i]=='\t')
-                            {
-                                i++;
-                            }
+                            i++;
                         else
                         {
                             text_detected=1;
@@ -99,10 +91,7 @@
                         }
 
                     }
-            }
-            if(between_tags)
-            {
-                            i=prsrv;
+                    i=prsrv;
             }
             if(text_detected==0)
             {
@@ -111,12 +100,7 @@
                 output_file<<line[i];
             }
             else
-            {
-
                 output_file<<line[i];
-            }
-
-
 
         }
     }
