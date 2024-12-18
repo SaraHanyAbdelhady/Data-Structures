@@ -113,6 +113,12 @@ void generateDOT(const vector<user>& graph, const string& outputFile) {
     }
     //display data in dot form 
     file << "digraph G {\n";
+    file << "    graph[fontsize = 24]\n";
+    file << "    edge[fontsize = 20 color = burlywood]\n";
+    file << "    node[margin=0 fontcolor=cornsilk fontsize=48 width=0.5 shape=circle style=filled fillcolor = darkorchid4]\n";
+    file << "    ranksep = 1.5\n";
+    file << "    nodesep = .25\n";
+    file << "    edge[style = \"setlinewidth(3)\"]\n";
     for (int i = 0; i < graph.size();i++) {
         for (int j = 0; j < graph[i].followers.size(); j++) {
             file << "    " << graph[i].ID << " -> " << graph[i].followers[j] << ";\n";
@@ -154,8 +160,8 @@ void Xml_to_Graph(const string& inputXML, const string& outputJpg) {
     generateJPG(dotFile, outputJpg);
 }
 int main() {
-    string inputXML = "../../Test_samples/Xml_to_Graph/sample2.xml";
-    string outputJPG = "../../Test_samples/Xml_to_Graph/graph2.jpg";
+    string inputXML = "../../Test_samples/Xml_to_Graph/sample1.xml";
+    string outputJPG = "../../Test_samples/Xml_to_Graph/graph1.jpg";
 
     Xml_to_Graph(inputXML, outputJPG);
 
