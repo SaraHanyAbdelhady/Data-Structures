@@ -139,9 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Validity_checker\isValid.cpp" />
     <ClCompile Include="Xml_to_Json.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Validity_checker\isValid.h" />
     <ClInclude Include="Xml_to_Json.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -18,11 +18,11 @@ void Xml_to_Json(const string& input, const string& output) {
         cout << "The input file path " << input << "is empty. Please provide a valid file.\n";
         return;
     }
-    //if (!isValid(input))                   //if xml file not valid
-    //{
-    //    cout << "The input file: " << input << "is invalid please choose another one" << endl;
-    //    return;
-    //}
+    if (!isValid(input))                   //if xml file not valid
+    {
+        cout << "The input file: " << input << " is invalid please choose another one" << endl;
+        return;
+    }
     if (!inputFile.is_open())               // if there is no file with this name in this path
     {
         cout << "Unable to open input file: " << input << endl;
@@ -50,6 +50,10 @@ void Xml_to_Json(const string& input, const string& output) {
 
     while (getline(inputFile, line)) {
 
+        // Skip empty lines
+        if (line.empty()) {
+            continue;
+        }
         // Handle comments (ignore them completely)
         int commentStart = line.find("<!--");
         int commentEnd = line.find("-->");
@@ -269,7 +273,7 @@ void Xml_to_Json(const string& input, const string& output) {
 }
 
 int main() {
-    string inputFilePath = "../../Test_samples/Xml_to_Json/sample4.xml";
+    string inputFilePath = "../../Test_samples/Xml_to_Json/sample_invalid.xml";
     string outputFilePath = "../../Test_samples/Xml_to_Json/output_file_json4.json";
     Xml_to_Json(inputFilePath, outputFilePath);
     return 0;
