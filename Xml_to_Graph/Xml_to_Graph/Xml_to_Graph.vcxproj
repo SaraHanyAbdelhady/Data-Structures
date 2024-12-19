@@ -139,9 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\parseXML\parseXML.cpp" />
     <ClCompile Include="Xml_to_Graph.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\parseXML\parseXML.h" />
     <ClInclude Include="Xml_to_Graph.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,4 +1,10 @@
 digraph G {
+    graph[fontsize = 24]
+    edge[fontsize = 20 color = burlywood]
+    node[margin=0 fontcolor=cornsilk fontsize=48 width=0.5 shape=circle style=filled fillcolor = darkorchid4]
+    ranksep = 1.5
+    nodesep = .25
+    edge[style = "setlinewidth(3)"]
     1 -> 2;
     1 -> 3;
     2 -> 1;
