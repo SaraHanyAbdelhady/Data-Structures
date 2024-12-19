@@ -45,6 +45,14 @@ void parseXML(const string& filename, vector<user>& graph)
                 else if (tagContent == "follower") {
                     in_follower = true;
                 }
+                else if (tagContent == "name") {
+                    // in case the opening and closing are in the same line
+                    if (!remainder.empty()) {
+                        string name = remainder.substr(0, remainder.find('<'));
+                        User.name = name;
+                        if (!tags.empty()) tags.pop();
+                    }
+                }
                 else if (tagContent == "id") {
                     // in case the opening and closing are in the same line
                     if (!remainder.empty()) {
@@ -85,6 +93,9 @@ void parseXML(const string& filename, vector<user>& graph)
                     else {
                         User.ID = stoi(line);
                     }
+                }
+                else if (currentTag == "name") {
+                    User.name = line;
                 }
             }
         }

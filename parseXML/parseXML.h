@@ -15,17 +15,21 @@ using namespace std;
 class user {
 public:
     int ID;
+    string name;
     vector<int> followers;
     user() {
         ID = 0;
+        name = "";
         followers = {};
     }
     user(int x) {
         ID = x;
         followers = {};
+        name = "";
     }
-    user(int x, vector<int>y) {
+    user(int x, vector<int>y,string z) {
         ID = x;
+        name = z;
         followers = y;
     }
 };
