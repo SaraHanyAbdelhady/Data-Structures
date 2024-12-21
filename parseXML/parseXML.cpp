@@ -11,8 +11,8 @@ using namespace std;
 
 
 
-// Function to parse XML and build a graph
-void parseXML(const string& filename, vector<user>& graph)
+// Function to parse XML and build a vector of users
+void parseXML(const string& filename, vector<user>& users)
 {
 
     ifstream inputFile(filename);
@@ -24,7 +24,8 @@ void parseXML(const string& filename, vector<user>& graph)
     }
     string line;                //to read line by line from the xml file
     stack<string> tags;         //to store tags
-    user User;                  // dammy user to fill graph vector
+    user User;                  // dammy user to fill users vector
+    post Post;                  // dammy user to fill posts vector
     bool in_follower = false;   //to see if id is from user or followers
     while (getline(inputFile, line)) {
 
@@ -42,6 +43,9 @@ void parseXML(const string& filename, vector<user>& graph)
                 if (tagContent == "user") {
                     User = user(); // initialize user
                 }
+                else if (tagContent == "post") {
+                     Post = post(); // initialize user
+                }
                 else if (tagContent == "follower") {
                     in_follower = true;
                 }
@@ -49,7 +53,26 @@ void parseXML(const string& filename, vector<user>& graph)
                     // in case the opening and closing are in the same line
                     if (!remainder.empty()) {
                         string name = remainder.substr(0, remainder.find('<'));
+                        name = name.erase(0, name.find_first_not_of(' '));
                         User.name = name;
+                        if (!tags.empty()) tags.pop();
+                    }
+                }
+                else if (tagContent == "topic") {
+                    // in case the opening and closing are in the same line
+                    if (!remainder.empty()) {
+                        string topic = remainder.substr(0, remainder.find('<'));
+                        topic = topic.erase(0, topic.find_first_not_of(' '));
+                        Post.topics.push_back(topic);
+                        if (!tags.empty()) tags.pop();
+                    }
+                }
+                else if (tagContent == "body") {
+                    // in case the opening and closing are in the same line
+                    if (!remainder.empty()) {
+                        string post = remainder.substr(0, remainder.find('<'));
+                        post = post.erase(0, post.find_first_not_of(' '));
+                        Post.body = post;
                         if (!tags.empty()) tags.pop();
                     }
                 }
@@ -72,7 +95,11 @@ void parseXML(const string& filename, vector<user>& graph)
                 string closingTag = tagContent.substr(1, tagContent.length() - 1);
                 if (closingTag == "user") {
                     // Add user to vector
-                    graph.push_back(User);
+                    users.push_back(User);
+                }
+                else if (closingTag == "post") {
+                    // Add user to vector
+                    User.posts.push_back(Post);
                 }
                 else if (closingTag == "follower") {
                     in_follower = false;
@@ -95,7 +122,16 @@ void parseXML(const string& filename, vector<user>& graph)
                     }
                 }
                 else if (currentTag == "name") {
+                    line = line.erase(0, line.find_first_not_of(' '));
                     User.name = line;
+                }
+                else if (currentTag == "topic") {
+                    line = line.erase(0, line.find_first_not_of(' '));
+                    Post.topics.push_back(line);
+                }
+                else if (currentTag == "body") {
+                    line = line.erase(0, line.find_first_not_of(' '));
+                    Post.body = line;
                 }
             }
         }

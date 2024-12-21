@@ -23,6 +23,15 @@ void generateDOT(const vector<user>& graph, const string& outputFile) {
     file << "    nodesep = .25\n";
     file << "    edge[style = \"setlinewidth(3)\"]\n";
     for (int i = 0; i < graph.size();i++) {
+        /*
+        cout << graph[i].ID << endl << endl;
+        cout << graph[i].name << endl << endl;
+        for (int x = 0; x < graph[i].followers.size(); x++)cout << graph[i].followers[x] << endl << endl;
+        for (int z = 0; z < graph[i].posts.size(); z++) {
+            cout << graph[i].posts[z].body << endl << endl;
+            for (int y = 0; y < graph[i].posts[z].topics.size(); y++)
+            cout << graph[i].posts[z].topics[y] << endl << endl;
+        }*/
         for (int j = 0; j < graph[i].followers.size(); j++) {
             file << "    " << graph[i].ID << " -> " << graph[i].followers[j] << ";\n";
         }
