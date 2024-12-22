@@ -71,12 +71,42 @@ void Xml_to_Graph(const string& inputXML, const string& outputJpg) {
     // Step 3: Generate JPG image using Graphviz
     generateJPG(dotFile, outputJpg);
 }
-int main() {
-    string inputXML = "../../Test_samples/Xml_to_Graph/sample1.xml";
-    string outputJPG = "../../Test_samples/Xml_to_Graph/graph1.jpg";
 
-    Xml_to_Graph(inputXML, outputJPG);
+// Main function to handle command-line arguments
+int main(int argc, char* argv[]) {
+    if (argc < 6) {
+        cerr << "Usage: xml_editor <operation> -i <input_file> -o <output_file>\n";
+        return 1;
+    }
 
+    string operation = argv[1];
+    string inputFileName, outputFileName;
+
+    for (int i = 2; i < argc; i += 2) {
+        string flag = argv[i];
+        if (flag == "-i") {
+            inputFileName = argv[i + 1];
+        }
+        else if (flag == "-o") {
+            outputFileName = argv[i + 1];
+        }
+    }
+
+    if (operation == "draw") {
+        Xml_to_Graph(inputFileName, outputFileName);
+    }
+    else {
+        cerr << "Invalid operation. Use 'draw' only." << endl;
+        return 1;
+    }
     return 0;
 }
+//int main() {
+//    string inputXML = "../../Test_samples/Xml_to_Graph/sample1.xml";
+//    string outputJPG = "../../Test_samples/Xml_to_Graph/graph1.jpg";
+//
+//    Xml_to_Graph(inputXML, outputJPG);
+//
+//    return 0;
+//}
 

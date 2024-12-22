@@ -272,9 +272,38 @@ void Xml_to_Json(const string& input, const string& output) {
     outputFile.close();
 }
 
-int main() {
-    string inputFilePath = "../../Test_samples/Xml_to_Json/sample_invalid.xml";
-    string outputFilePath = "../../Test_samples/Xml_to_Json/output_file_json4.json";
-    Xml_to_Json(inputFilePath, outputFilePath);
+int main(int argc, char* argv[]) {
+    if (argc < 6) {
+        cerr << "Usage: xml_editor json -i input_file.xml -o output_file.json\n";
+        return 1;
+    }
+
+    string operation = argv[1];
+    string inputFileName, outputFileName;
+
+    for (int i = 2; i < argc; i += 2) {
+        string flag = argv[i];
+        if (flag == "-i") {
+            inputFileName = argv[i + 1];
+        }
+        else if (flag == "-o") {
+            outputFileName = argv[i + 1];
+        }
+    }
+
+    if (operation == "json") {
+        Xml_to_Json(inputFileName, outputFileName);
+    }
+    else {
+        cerr << "Invalid operation. Use 'json' only." << endl;
+        return 1;
+    }
     return 0;
 }
+
+//int main() {
+//    string inputFilePath = "../../Test_samples/Xml_to_Json/sample_invalid.xml";
+//    string outputFilePath = "../../Test_samples/Xml_to_Json/output_file_json4.json";
+//    Xml_to_Json(inputFilePath, outputFilePath);
+//    return 0;
+//}

@@ -1,4 +1,8 @@
-﻿  Xml_to_Graph.cpp
+﻿  parseXML.cpp
+C:\Users\Dell\Documents\GitHub\Data-Structures\parseXML\parseXML.cpp(38,26): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Dell\Documents\GitHub\Data-Structures\parseXML\parseXML.cpp(38,75): warning C4018: '<': signed/unsigned mismatch
+  Xml_to_Graph.cpp
 C:\Users\Dell\Documents\GitHub\Data-Structures\Xml_to_Graph\Xml_to_Graph\Xml_to_Graph.cpp(25,23): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Dell\Documents\GitHub\Data-Structures\Xml_to_Graph\Xml_to_Graph\Xml_to_Graph.cpp(35,27): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
   Xml_to_Graph.vcxproj -> C:\Users\Dell\Documents\GitHub\Data-Structures\Xml_to_Graph\Debug\Xml_to_Graph.exe
