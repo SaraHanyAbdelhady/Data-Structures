@@ -1,0 +1,88 @@
+<users>
+    <user>
+        <id>
+            1
+        </id>
+        <name>
+            Ahmed Ali
+        </name>
+        <posts>
+            <post>
+                <body>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </body>
+                <topics>
+                    <topic>
+                        economy
+                    </topic>
+                </topics>
+            </post>
+        </posts>
+        <followers>
+            <follower>
+                <id>
+                    2
+                </id>
+            </follower>
+        </followers>
+    </user>
+    <user>
+        <id>
+            2
+        </id>
+        <name>
+            Yasser Ahmed
+        </name>
+        <posts>
+            <post>
+                <body>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </body>
+                <topics>
+                    <topic>
+                        business
+                    </topic>
+                </topics>
+            </post>
+        </posts>
+        <followers>
+            <follower>
+                <id>
+                    3
+                </id>
+            </follower>
+        </followers>
+    </user>
+    <user>
+        <id>
+            3
+        </id>
+        <name>
+            Mohamed Sherif
+        </name>
+        <posts>
+            <post>
+                <body>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </body>
+                <topics>
+                    <topic>
+                        technology
+                    </topic>
+                </topics>
+            </post>
+        </posts>
+        <followers>
+            <follower>
+                <id>
+                    1
+                </id>
+            </follower>
+            <follower>
+                <id>
+                    2
+                </id>
+            </follower>
+        </followers>
+    </user>
+</users>
