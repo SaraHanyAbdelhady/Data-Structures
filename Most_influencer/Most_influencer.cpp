@@ -10,16 +10,15 @@
 using namespace std;
 
 
-int main() {
-    vector<user> most_influencers;
-    string path = "ex1.txt";
+void Most_influencers(vector<user> most_influencers,string path){
+
 
     // Parse the XML file and populate the 'most_influencers' vector
     parseXML(path, most_influencers);
 
     if (most_influencers.empty()) {
         cout << "No users found in the XML file." << endl;
-        return 0;
+
     }
 
     // Find the user with the most followers
@@ -33,12 +32,11 @@ int main() {
         }
     }
 
-    // Output the name and ID of the most influential user
+    // Output the name and ID of the most influential user and the number of followers
     cout << "Most influential user: " << endl;
     cout << "ID: " << most_influential_user.ID << endl;
     cout << "Name: " << most_influential_user.name << endl;
-
-    return 0;
+    cout << "the number of followers user: " <<max_followers <<endl;
 }
 
 
