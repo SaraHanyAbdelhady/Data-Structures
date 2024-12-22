@@ -6,6 +6,7 @@
 #include <vector>
 #include <algorithm>
 #include "../Validity_checker/isValid.h"
+#include "Error_Correction.h"
 
 using namespace std;
 

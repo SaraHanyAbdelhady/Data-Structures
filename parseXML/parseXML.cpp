@@ -24,8 +24,8 @@ void parseXML(const string& filename, vector<user>& users)
     }
     string line;                //to read line by line from the xml file
     stack<string> tags;         //to store tags
-    user User;                  // dammy user to fill users vector
-    post Post;                  // dammy user to fill posts vector
+    user User;                  // dummy user to fill users vector
+    post Post;                  // dummy user to fill posts vector
     bool in_follower = false;   //to see if id is from user or followers
     while (getline(inputFile, line)) {
 
