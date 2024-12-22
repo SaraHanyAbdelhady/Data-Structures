@@ -80,7 +80,7 @@ void formatXML(const string &inputFile, const string &outputFile) {
 }
 
 int main() {
-    string inputFile = "input.txt";   // Input XML file
+    string inputFile = "example.txt";   // Input XML file
     string outputFile = "output.txt"; // Output XML file
 
     formatXML(inputFile, outputFile);
