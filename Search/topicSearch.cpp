@@ -67,5 +67,5 @@ ifstream inputFile(filename);
 int main()
 
 {
-   topicSearch("../Test_samples/Xml_to_json/sample.xml","economy");
+   topicSearch("Test_samples/Xml_to_json/sample.xml","blabla");
 }
