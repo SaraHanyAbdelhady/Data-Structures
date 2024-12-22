@@ -18,28 +18,6 @@ ifstream inputFile(filename);
     vector<user> users;
     parseXML(filename,users);
 
-    // vector<vector<post>> posts;
-
-    // vector<vector<string>> topics;
-    
-    // for(long long i =0; i<users.size(); i++){
-    //     posts.push_back(users[i].posts);
-    // }
-    
-    // for(long long i =0; i<posts.size(); i++){
-    //     for(long long j=0; j<posts[i].size(); j++){
-    //         topics.push_back(posts[i][j].topics);
-    //     }
-    // }
-
-    //  for(long long i =0; i<topics.size(); i++){
-    //     for(long long j=0; j<topics[i].size(); j++){
-    //         if(topics[i][j] == topic){
-                
-    //         }
-    //     }
-    // }
-
     int found =0;
     for(long long i=0; i<users.size(); i++){
         for(long long j=0; j<users[i].posts.size(); j++){
