@@ -11,8 +11,6 @@ using namespace std;
 
 
 void Most_influencers(vector<user> most_influencers,string path){
-
-
     // Parse the XML file and populate the 'most_influencers' vector
     parseXML(path, most_influencers);
 
