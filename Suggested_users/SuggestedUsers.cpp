@@ -4,9 +4,8 @@
 #include <vector>
 #include <string>
 #include <iostream>
-#include "parseXML.h"
-
 #include <unordered_set>
+#include "parseXML.h"
 
 list<string> suggested_users(const std::string& input_file, int id) {
     list<string> suggested_users;
@@ -59,16 +58,29 @@ list<string> suggested_users(const std::string& input_file, int id) {
     return suggested_users;
 }
 
+int main(int argc, char* argv[]) {
+    if (argc != 5) {
+        std::cerr << "Usage: xml_editor suggest -i <input_file.xml> -id <user_id>" << std::endl;
+        return 1;
+    }
 
-int main() {
-    const std::string file = "sample1.xml";
-    int id = 3;
+    std::string command = argv[1];
+    std::string input_flag = argv[2];
+    std::string input_file = argv[3];
+    std::string id_flag = argv[4];
+    int id = std::stoi(argv[5]);
 
-    list<string> suggestions = suggested_users(file, id);
+    // Validate command and flags
+    if (command != "suggest" || input_flag != "-i" || id_flag != "-id") {
+        std::cerr << "Error: Invalid command or flags." << std::endl;
+        return 1;
+    }
+
+    list<string> suggestions = suggested_users(input_file, id);
 
     // Print the suggested users
     std::cout << "Suggested users for user " << id << ": ";
-    for (string user_name : suggestions) {
+    for (const std::string& user_name : suggestions) {
         std::cout << user_name << " ";
     }
     std::cout << std::endl;
