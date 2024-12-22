@@ -14,6 +14,9 @@
                     <topic>
                         finance
                     </topic>
+                    <topic>
+                        economy
+                    </topic>
                 </topics>
             </post>
             <post>
@@ -23,6 +26,9 @@
                 <topics>
                     <topic>
                         solar_energy
+                    </topic>
+                    <topic>
+                        economy
                     </topic>
                 </topics>
             </post>
@@ -48,6 +54,9 @@
                     <topic>
                         education
                     </topic>
+                    <topic>
+                        economy
+                    </topic>
                 </topics>
             </post>
         </posts>
@@ -68,6 +77,9 @@
                 <topics>
                     <topic>
                         sports
+                    </topic>
+                    <topic>
+                        economy
                     </topic>
                 </topics>
             </post>

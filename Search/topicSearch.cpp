@@ -1,0 +1,69 @@
+#include"../parseXML/parseXML.h"
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void topicSearch(const string& filename,string topic)
+
+{
+
+ifstream inputFile(filename);
+    // if error in opening xml file
+    if (!inputFile.is_open())
+    {
+        cout << "Unable to open input file: " << filename << std::endl;
+        return;
+    }
+
+    vector<user> users;
+    parseXML(filename,users);
+
+    // vector<vector<post>> posts;
+
+    // vector<vector<string>> topics;
+    
+    // for(long long i =0; i<users.size(); i++){
+    //     posts.push_back(users[i].posts);
+    // }
+    
+    // for(long long i =0; i<posts.size(); i++){
+    //     for(long long j=0; j<posts[i].size(); j++){
+    //         topics.push_back(posts[i][j].topics);
+    //     }
+    // }
+
+    //  for(long long i =0; i<topics.size(); i++){
+    //     for(long long j=0; j<topics[i].size(); j++){
+    //         if(topics[i][j] == topic){
+                
+    //         }
+    //     }
+    // }
+
+    int flag =0;
+    for(long long i=0; i<users.size(); i++){
+        for(long long j=0; j<users[i].posts.size(); j++){
+            for(long long k=0; k<users[i].posts[j].topics.size(); k++){
+                if(users[i].posts[j].topics[k] == topic){
+                    flag=1;
+                    cout << "User: " << users[i].name<<" " <<"Post index: "<<j+1<<" "<<"Topic index: "<<k+1<<" "<< endl;
+                }
+            }
+        }
+    }
+
+    if(flag==0) cout<<"Topic not found"<<endl;
+
+
+
+
+}
+
+
+
+
+int main()
+
+{
+   topicSearch("Test_samples/Xml_to_json/sample.xml","blabla");
+}
