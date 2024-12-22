@@ -40,19 +40,21 @@ ifstream inputFile(filename);
     //     }
     // }
 
-    int flag =0;
+    int found =0;
     for(long long i=0; i<users.size(); i++){
         for(long long j=0; j<users[i].posts.size(); j++){
-            for(long long k=0; k<users[i].posts[j].topics.size(); k++){
-                if(users[i].posts[j].topics[k] == topic){
-                    flag=1;
-                    cout << "User: " << users[i].name<<" " <<"Post index: "<<j+1<<" "<<"Topic index: "<<k+1<<" "<< endl;
-                }
+           unordered_set<string> topicSet(users[i].posts[j].topics.begin(), users[i].posts[j].topics.end());
+                if (topicSet.find(topic) != topicSet.end()) {
+                found = 1;
+                cout << "User: " << users[i].name 
+                     << " Post index: " << j + 1 
+                     << " (Topic found)" << endl;
+            }
             }
         }
-    }
+    
 
-    if(flag==0) cout<<"Topic not found"<<endl;
+    if(found==0) cout<<"Topic not found"<<endl;
 
 
 
@@ -65,5 +67,5 @@ ifstream inputFile(filename);
 int main()
 
 {
-   topicSearch("Test_samples/Xml_to_json/sample.xml","blabla");
+   topicSearch("../Test_samples/Xml_to_json/sample.xml","economy");
 }
