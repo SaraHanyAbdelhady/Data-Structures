@@ -17,7 +17,7 @@ void compress(const string& inputFileName, const string& outputFileName) {
 
     // Check the file size
     streamsize fileSize = inputFile.tellg();
-    if (fileSize < 5120) { // 5 KB = 5120 bytes
+    if (fileSize < 3072) { // 5 KB = 5120 bytes
         cerr << "File size is smaller than 5 KB. Compression skipped." << endl;
         inputFile.close();
         return;
