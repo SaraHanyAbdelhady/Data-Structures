@@ -8,11 +8,26 @@ using namespace std;
 
 // Function to compress a file using LZW encoding
 void compress(const string& inputFileName, const string& outputFileName) {
-    ifstream inputFile(inputFileName, ios::binary);
-    ofstream outputFile(outputFileName, ios::binary);
+    ifstream inputFile(inputFileName, ios::binary | ios::ate);
 
-    if (!inputFile.is_open() || !outputFile.is_open()) {
-        cerr << "Error opening file." << endl;
+    if (!inputFile.is_open()) {
+        cerr << "Error opening input file." << endl;
+        return;
+    }
+
+    // Check the file size
+    streamsize fileSize = inputFile.tellg();
+    if (fileSize < 5120) { // 5 KB = 5120 bytes
+        cerr << "File size is smaller than 5 KB. Compression skipped." << endl;
+        inputFile.close();
+        return;
+    }
+    inputFile.seekg(0, ios::beg);
+
+    ofstream outputFile(outputFileName, ios::binary);
+    if (!outputFile.is_open()) {
+        cerr << "Error opening output file." << endl;
+        inputFile.close();
         return;
     }
 
@@ -30,8 +45,9 @@ void compress(const string& inputFileName, const string& outputFileName) {
         string next = current + c;
         if (dictionary.find(next) != dictionary.end()) {
             current = next;
-        } else {
-compressed.push_back(dictionary[current]);
+        }
+        else {
+            compressed.push_back(dictionary[current]);
             if (code < 4096) {
                 dictionary[next] = code++;
             }
@@ -77,9 +93,11 @@ void decompress(const string& inputFileName, const string& outputFileName) {
         string entry;
         if (dictionary.find(newCode) != dictionary.end()) {
             entry = dictionary[newCode];
-        } else if (newCode == code) {
+        }
+        else if (newCode == code) {
             entry = current + current[0];
-        } else {
+        }
+        else {
             cerr << "Decompression error." << endl;
             return;
         }
@@ -100,6 +118,7 @@ void decompress(const string& inputFileName, const string& outputFileName) {
 // Main function to handle command-line arguments
 int main(int argc, char* argv[]) {
     if (argc < 5) {
+        cout << argv[0];
         cerr << "Usage: xml_editor <operation> -i <input_file> -o <output_file>\n";
         return 1;
     }
@@ -111,19 +130,22 @@ int main(int argc, char* argv[]) {
         string flag = argv[i];
         if (flag == "-i") {
             inputFileName = argv[i + 1];
-        } else if (flag == "-o") {
+        }
+        else if (flag == "-o") {
             outputFileName = argv[i + 1];
         }
     }
 
     if (operation == "compress") {
         compress(inputFileName, outputFileName);
-    } else if (operation == "decompress") {
+    }
+    else if (operation == "decompress") {
         decompress(inputFileName, outputFileName);
-    } else {
+    }
+    else {
         cerr << "Invalid operation. Use 'compress' or 'decompress'." << endl;
         return 1;
     }
 
-    return 0;
+    return 0;
 }
