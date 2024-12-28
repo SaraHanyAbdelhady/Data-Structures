@@ -114,11 +114,18 @@ openings.pop();
 unOpened.push_back(make_pair(closings.front().second,closings.front().first));
 closings.pop();
 }
-     inputFile.close();
-     if(!unClosed.empty())
-     cout<<"Unclosed not empty"<<"\n";
-         if(!unOpened.empty())
-     cout<<"UnOpened not empty"<<"\n";
+    inputFile.close();
+    if(!unClosed.empty())
+    cout<<"Unclosed not empty"<<"\n";
+    if(!unOpened.empty())
+    cout<<"UnOpened not empty"<<"\n";
+    cout<< "The Number of errors are "<<unOpened.size()+ unClosed.size()<< "\n";
+    int x = unOpened.size()
+    for(int i = 0; i < x; i++)
+    {
+
+    }
+    cout<< unOpened.size()+ unClosed.size()<< "\n";
      return unClosed.empty()&&unOpened.empty();
 
 
