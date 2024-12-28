@@ -5,6 +5,6 @@
 using namespace std;
 
 
-void errorCorrection(const string& input , const string& output)       // Declaration of function
+void errorCorrection(const string& input , const string& output);       // Declaration of function
 
 #endif

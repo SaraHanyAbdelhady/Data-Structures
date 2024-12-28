@@ -9,12 +9,14 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    ../../Error_Correction/Error_Correction.cpp \
     ../../Validity_checker/isValid.cpp \
     ../../most_active/most_active.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
+    ../../Error_Correction/Error_Correction.h \
     ../../Validity_checker/isValid.h \
     ../../most_active/most_active.h \
     mainwindow.h

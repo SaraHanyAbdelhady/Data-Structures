@@ -13,6 +13,7 @@
 #include <QLabel>
 #include <QWidget>
 #include <QFile>
+#include <QMessageBox>
 #include <QTextStream>
 #include <QMessageBox>
 #include <QXmlStreamWriter>
@@ -27,6 +28,7 @@
 
 #include "../../Validity_checker/isValid.h"
 #include "../../most_active/most_active.h"
+#include "../../Error_Correction/Error_Correction.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

@@ -285,24 +285,27 @@ void MainWindow::valid() {
 
     // Get the output and append it to QTextEdit
     QString output = QString::fromStdString(oss.str());
-    outputTextBox->append(output);
+    //outputTextBox->setPlainText(output);
 
-    QString fileName =QString::fromStdString(filePath);
-    if (!fileName.isEmpty()) {
-        QFile file(fileName);
-        if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-            QTextStream in(&file);
-              outputTextBox->setPlainText(in.readAll());
+    QMessageBox::information(this, "Info", output);
 
-        }
+
+
+    if(!isValid(filePath))
+     {
+        QString fileName =QString::fromStdString(filePath);
+        if (!fileName.isEmpty()) {
+            QFile file(fileName);
+            if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+                QTextStream in(&file);
+                outputTextBox->setPlainText(in.readAll());
+
+            }
 
 
             file.close();
         }
-
-
-    if(!isValid(filePath))
-     {     stack<pair<string, long long>> copy = unClosed;
+        stack<pair<string, long long>> copy = unClosed;
         while(!copy.empty())
     {
              highlightLine(outputTextBox,copy.top().second-1);
@@ -322,10 +325,49 @@ void MainWindow::valid() {
 
 }
 
+
 void MainWindow::corr() {
     outputTextBox->clear();
-    string filePath = saveToXml();
+
+        // Save input to an XML file
+        string filePath = saveToXml();
+        string outputPath = "sample4Soln.txt";
+
+         errorCorrection(filePath, outputPath);
+
+    QFile file(outputPath.c_str());
+    if (!file.open(QIODevice::ReadWrite | QIODevice::Text)) {
+        QMessageBox::critical(this, "Error", "Unable to open file: " + file.errorString());
+        return;
+    }
+
+    // Read the file content
+    QString fileContent;
+    QTextStream in(&file);
+    fileContent = in.readAll();
+
+    if(fileContent == "0") {
+        outputTextBox->setPlainText("The XML file is valid and no error correction is needed");
+         file.close();
+    }
+
+
+    else{
+    // Perform edits on the file content (example: appending text)
+    //fileContent += "\nEdited content added to the file.";
+
+    // Write the modified content back to the file
+    file.resize(0); // Clear the file before writing
+    QTextStream out(&file);
+    out << fileContent;
+
+    file.close();
+
+    // Display the updated file content in the outputTextBox
+    outputTextBox->setPlainText(fileContent);
+    }
 }
+
 
 void MainWindow::processText() {
     outputTextBox->clear();
@@ -367,7 +409,7 @@ void MainWindow::clearHighlights(QTextEdit* textEdit) {
     for (QTextBlock block = doc->begin(); block.isValid(); block = block.next()) {
         QTextCursor blockCursor(block);
         QTextBlockFormat blockFormat;
-        blockFormat.setBackground(Qt::white); // Reset background to default
+        //blockFormat.setBackground(Qt::white); // Reset background to default
         blockCursor.setBlockFormat(blockFormat);
     }
 }

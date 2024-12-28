@@ -11,6 +11,8 @@
 using namespace std;
 
 void errorCorrection(const string& input , const string& output) {
+
+
     ifstream inputFile(input);
     ofstream outputFile(output); 
 
@@ -30,6 +32,12 @@ void errorCorrection(const string& input , const string& output) {
     if (!outputFile.is_open())
     {
         cout << "Unable to open output file: " << output << endl;
+        return;
+    }
+
+    if(isValid(input)){
+        cout<<"The input file is valid no error correction needed";
+        outputFile<<NULL;
         return;
     }
 
@@ -121,12 +129,12 @@ void errorCorrection(const string& input , const string& output) {
    outputFile.close();
 }
 
-  int main(){
-   cout<<isValid("../Test_samples/Xml_to_json/sample4.xml")<<"\n";
-   errorCorrection("../Test_samples/Xml_to_json/sample4.xml", "sample4Soln.txt");
+  // int main(){
+  //  cout<<isValid("../Test_samples/Xml_to_json/sample4.xml")<<"\n";
+  //  errorCorrection("../Test_samples/Xml_to_json/sample4.xml", "sample4Soln.txt");
 
    
-     cout<<isValid("sample4Soln.txt")<<"\n";
+  //    cout<<isValid("sample4Soln.txt")<<"\n";
    
 
-   }
+  //  }
