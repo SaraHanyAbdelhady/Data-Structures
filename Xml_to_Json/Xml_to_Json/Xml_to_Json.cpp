@@ -13,7 +13,7 @@ using namespace std;
 void Xml_to_Json(const string& input, const string& output) {
     ifstream inputFile(input);
     ofstream outputFile(output);
-    if (input.empty())                      //if there is no code in the file
+    if (inputFile.tellg() == 0)                      //if there is no code in the file
     {
         cout << "The input file path " << input << "is empty. Please provide a valid file.\n";
         return;

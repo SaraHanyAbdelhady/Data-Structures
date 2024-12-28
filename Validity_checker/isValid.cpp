@@ -14,8 +14,8 @@ vector <pair<long long,string>>unOpened;
 
    bool isValid(const string& input) {
     ifstream inputFile(input);
-   
-    if (input.empty())
+
+    if (inputFile.tellg() == 0)
     {
         cout << "The input file path " << input << "is empty. Please provide a valid file.\n";
         return false;
