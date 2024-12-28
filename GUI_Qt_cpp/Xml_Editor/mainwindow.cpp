@@ -168,6 +168,8 @@ void MainWindow::networkanalysisAction() {
     if (dropdown->currentIndex() == 0){
         // call "Most Active"
         //outputTextBox->append(lw elfunction void nadoha hena);
+        // Redirect cout to a string stream
+
     }
     else if (dropdown->currentIndex() == 1){
         // call "Most Infleuncer"
@@ -238,17 +240,19 @@ void MainWindow::valid() {
     outputTextBox->clear();
     string filePath = saveToXml();
 
-    bool val = isValid(filePath);
-    if(val && !empt){
-        outputTextBox->append("The XML file is valid");
-    }
-    else if (!empt)
-    {
-        outputTextBox->clear();
-        outputTextBox->setTextColor(QColor::fromRgb(255, 0, 0));
-        outputTextBox->append("The XML file is not valid");
-        outputTextBox->setTextColor(QColor::fromRgb(0, 0, 0));
-    }
+    std::ostringstream oss;
+    std::streambuf* oldCoutBuffer = std::cout.rdbuf(oss.rdbuf());
+
+    // Call the function
+    isValid(filePath);
+
+    // Restore the original cout buffer
+    std::cout.rdbuf(oldCoutBuffer);
+
+    // Get the output and append it to QTextEdit
+    QString output = QString::fromStdString(oss.str());
+    outputTextBox->append(output);
+
 }
 
 void MainWindow::corr() {

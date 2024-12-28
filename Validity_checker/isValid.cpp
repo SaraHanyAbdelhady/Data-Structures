@@ -15,9 +15,9 @@ vector <pair<long long,string>>unOpened;
    bool isValid(const string& input) {
     ifstream inputFile(input);
 
-    if (inputFile.tellg() == 0)
+    if (inputFile.peek()== std::ifstream::traits_type::eof())
     {
-        cout << "The input file path " << input << "is empty. Please provide a valid file.\n";
+        cout << "The input file path " << input << " is empty. Please provide a valid file.\n";
         return false;
     }
     
@@ -119,17 +119,18 @@ closings.pop();
     cout<<"Unclosed not empty"<<"\n";
     if(!unOpened.empty())
     cout<<"UnOpened not empty"<<"\n";
-    cout<< "The Number of errors are "<<unOpened.size()+ unClosed.size()<< "\n";
-    int x = unOpened.size()
-    for(int i = 0; i < x; i++)
+    if(!(unClosed.empty()&&unOpened.empty())){
+        cout<< "The XML file is not valid "<<endl;
+        cout<< "The Number of errors are "<<unOpened.size()+ unClosed.size()<< "\n";
+    }
+    else cout<< "The XML file is valid ";
+    int x = unOpened.size();
+    for(int i = 0; i < x; i++);
     {
 
     }
-    cout<< unOpened.size()+ unClosed.size()<< "\n";
-     return unClosed.empty()&&unOpened.empty();
+    return unClosed.empty()&&unOpened.empty();
 
-
-   
    }
 
 //   int main() {

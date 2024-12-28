@@ -10,11 +10,13 @@ CONFIG += c++17
 
 SOURCES += \
     ../../Validity_checker/isValid.cpp \
+    ../../most_active/most_active.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     ../../Validity_checker/isValid.h \
+    ../../most_active/most_active.h \
     mainwindow.h
 
 FORMS += \

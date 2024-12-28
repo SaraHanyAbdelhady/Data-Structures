@@ -17,8 +17,11 @@
 #include <QMessageBox>
 #include <QXmlStreamWriter>
 #include <QString>
+#include <sstream>
+#include <iostream>
 
 #include "../../Validity_checker/isValid.h"
+#include "../../most_active/most_active.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
