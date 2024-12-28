@@ -19,6 +19,11 @@
 #include <QString>
 #include <sstream>
 #include <iostream>
+#include<QPlainTextEdit>
+#include <QTextCursor>
+#include <QTextBlockFormat>
+#include <QColor>
+#include<QTextBlock>
 
 #include "../../Validity_checker/isValid.h"
 #include "../../most_active/most_active.h"
@@ -64,7 +69,9 @@ private:
     QVBoxLayout *outputLayout;
 
     // privare function
+    void highlightLine(QTextEdit* textEdit, int lineNumber);
     string saveToXml();
+    void clearHighlights(QTextEdit* textEdit);
 private slots:
     void processText();             // Slot for processing input text
     void saveFile();                // Slot for saving file

@@ -26,7 +26,10 @@ vector <pair<long long,string>>unOpened;
         cout << "Unable to open input file: " << input << endl;
         return false;
     }
-// unClosed.clear();
+    while(!unClosed.empty())
+ {
+     unClosed.pop();
+    }
 unOpened.clear();
      string inputStream;
      stack<pair<string,long long>> openings;
@@ -119,16 +122,12 @@ closings.pop();
     cout<<"Unclosed not empty"<<"\n";
     if(!unOpened.empty())
     cout<<"UnOpened not empty"<<"\n";
-    if(!(unClosed.empty()&&unOpened.empty())){
+    if(!(unClosed.empty()||unOpened.empty())){
         cout<< "The XML file is not valid "<<endl;
         cout<< "The Number of errors are "<<unOpened.size()+ unClosed.size()<< "\n";
-    }
-    else cout<< "The XML file is valid ";
-    int x = unOpened.size();
-    for(int i = 0; i < x; i++);
-    {
 
     }
+    else cout<< "The XML file is valid ";
     return unClosed.empty()&&unOpened.empty();
 
    }

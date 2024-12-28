@@ -15,6 +15,10 @@ MainWindow::MainWindow(QWidget *parent) {
     loadFileButton = new QPushButton("Load File");
     connect(loadFileButton, &QPushButton::clicked, this, &MainWindow::loadFile);
 
+    
+   // inputTextBox->setPlainText("Line 1\nLine 2\nLine 3\nLine 4");
+
+
     inputLayout = new QVBoxLayout();
     inputLayout->addWidget(inputLabel);
     inputLayout->addWidget(inputTextBox);
@@ -97,6 +101,9 @@ MainWindow::MainWindow(QWidget *parent) {
     outputTextBox->setPlaceholderText("Output Will Appear Here");
     saveFileButton = new QPushButton("Save File");
     connect(saveFileButton, &QPushButton::clicked, this, &MainWindow::saveFile);
+    // Highlight line 2 (index starts at 0)
+
+
 
     outputLayout = new QVBoxLayout();
     outputLayout->addWidget(outputLabel);
@@ -265,6 +272,7 @@ void MainWindow::pret() {
 void MainWindow::valid() {
     outputTextBox->clear();
     string filePath = saveToXml();
+    clearHighlights(outputTextBox);
 
     std::ostringstream oss;
     std::streambuf* oldCoutBuffer = std::cout.rdbuf(oss.rdbuf());
@@ -279,6 +287,39 @@ void MainWindow::valid() {
     QString output = QString::fromStdString(oss.str());
     outputTextBox->append(output);
 
+    QString fileName =QString::fromStdString(filePath);
+    if (!fileName.isEmpty()) {
+        QFile file(fileName);
+        if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            QTextStream in(&file);
+              outputTextBox->setPlainText(in.readAll());
+
+        }
+
+
+            file.close();
+        }
+
+
+    if(!isValid(filePath))
+     {     stack<pair<string, long long>> copy = unClosed;
+        while(!copy.empty())
+    {
+             highlightLine(outputTextBox,copy.top().second-1);
+            qInfo() << copy.top().first<<"\n";
+            qInfo() << copy.top().second<<"\n";
+            copy.pop();
+    }//stack
+        if(!unOpened.empty())
+    {    for(long long k=0;k<unOpened.size();k++)
+        {
+        highlightLine(outputTextBox, unOpened[k].first-1);
+        qInfo() <<unOpened[k].second<<"\n";
+        qInfo() <<unOpened[k].first<<"\n";
+        }//vector
+        }
+    }
+
 }
 
 void MainWindow::corr() {
@@ -290,5 +331,49 @@ void MainWindow::processText() {
     outputTextBox->clear();
     string filePath = saveToXml();
 }
+
+void MainWindow::highlightLine(QTextEdit* textEdit, int lineNumber) {
+    if (!textEdit) return;
+    QTextDocument* doc = textEdit->document();
+    if (lineNumber < 0 || lineNumber >= doc->blockCount()) return; // Ensure lineNumber is valid
+
+    // Highlight the specified line
+    QTextBlock block = doc->findBlockByLineNumber(lineNumber);
+    if (!block.isValid()) return;
+
+    QTextCursor cursor(block);
+    QTextBlockFormat blockFormat;
+    blockFormat.setBackground(QColor(Qt::yellow)); // Set highlight color (yellow in this case)
+    cursor.setBlockFormat(blockFormat);
+}
+// void MainWindow::clearHighlights(QTextEdit* textEdit) {
+//     if (!textEdit) return;
+
+//     QTextDocument* doc = textEdit->document();
+//     QTextCursor clearCursor(doc);
+//     clearCursor.select(QTextCursor::Document);
+//     QTextBlockFormat clearFormat;
+//     clearFormat.setBackground(Qt::white); // Reset background to default
+//     clearCursor.setBlockFormat(clearFormat);
+// }
+
+void MainWindow::clearHighlights(QTextEdit* textEdit) {
+    if (!textEdit) return;
+
+    QTextDocument* doc = textEdit->document();
+    QTextCursor cursor(doc);
+
+    // Iterate through each block in the document
+    for (QTextBlock block = doc->begin(); block.isValid(); block = block.next()) {
+        QTextCursor blockCursor(block);
+        QTextBlockFormat blockFormat;
+        blockFormat.setBackground(Qt::white); // Reset background to default
+        blockCursor.setBlockFormat(blockFormat);
+    }
+}
+
+
+
+
 
 MainWindow::~MainWindow(){}
