@@ -112,13 +112,23 @@ MainWindow::MainWindow(QWidget *parent) {
     setCentralWidget(container);
     setWindowTitle("MM STASH");
 }
+
 void MainWindow::loadFile() {
     QString fileName = QFileDialog::getOpenFileName(this, "Open File", "", "Text Files (*.xml);;All Files (*)");
     if (!fileName.isEmpty()) {
         QFile file(fileName);
         if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
             QTextStream in(&file);
-            inputTextBox->setPlainText(in.readAll());
+            QString numberedText;
+            int lineNumber = 1;
+
+            while (!in.atEnd()) {
+                QString line = in.readLine();
+                numberedText += QString::number(lineNumber) + ": " + line + "\n";
+                ++lineNumber;
+            }
+
+            inputTextBox->setPlainText(numberedText);
             file.close();
         }
     }
@@ -138,28 +148,44 @@ void MainWindow::saveFile() {
 
 string MainWindow::saveToXml() {
     QString inputText = inputTextBox->toPlainText();
-    if(inputText.isEmpty()){
+    if (inputText.isEmpty()) {
         outputTextBox->setTextColor(QColor::fromRgb(255, 0, 0));
         outputTextBox->append("Input is EMPTY, Please enter an input...");
         outputTextBox->setTextColor(QColor::fromRgb(0, 0, 0));
         empt = true;
+        return "";
     }
+
+    // Remove line numbers
+    QStringList lines = inputText.split('\n');
+    QString unnumberedText;
+    for (const QString &line : lines) {
+        int x = line.toStdString().find(":");
+        string trimmedLine = line.toStdString();
+        if(x>-1 && x<line.toStdString().length()) trimmedLine  = line.toStdString().substr(x+1);
+        //QString trimmedLine = line.section(':', 1).trimmed(); // Remove the part before and including ':'
+        if (!trimmedLine.empty()) {
+
+            unnumberedText += QString::fromStdString(trimmedLine)  + '\n';
+        }
+    }
+
     // Specify the file path
     QString filePath = "input.xml";
-
 
     QFile file(filePath);
     if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
         // Create a QTextStream to write text to the file
         QTextStream out(&file);
-        out << inputText;
+        out << unnumberedText;
 
         // Close the file
         file.close();
     }
-    string x = filePath.toStdString();
-    return x;
+
+    return filePath.toStdString();
 }
+
 
 void MainWindow::networkanalysisAction() {
     QComboBox *dropdown = qobject_cast<QComboBox *>(sender());
