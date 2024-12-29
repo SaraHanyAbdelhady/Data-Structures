@@ -1,6 +1,45 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+/*boso 3lshan nnady elfunctions
+1. lw hya void wana 3ayza adisplay elcout
+    std::ostringstream oss;
+    std::streambuf* oldCoutBuffer = std::cout.rdbuf(oss.rdbuf());
 
+    // Call the function
+    isValid(filePath);
+
+    // Restore the original cout buffer
+    std::cout.rdbuf(oldCoutBuffer);
+
+    // Get the output and append it to QTextEdit
+    QString output = QString::fromStdString(oss.str());
+    //outputTextBox->setPlainText(output);
+da byredirect el cout 3nd el outputtext box
+2. lw bya5od file wyrag3 file
+    outputTextBox->clear();
+    string filePath = saveToXml();;
+    string outputPath = "output.xml";
+    QFile file(outputPath.c_str());
+
+    // Read the file content
+    QString fileContent;
+    QTextStream in(&file);
+    fileContent = in.readAll();
+
+    if(fileContent == "0") {
+        outputTextBox->setPlainText("The XML file is valid and no error correction is needed");
+        file.close();
+    }
+    else
+    {
+
+    file.resize(0); // Clear the file before writing
+    QTextStream out(&file);
+    out << fileContent;
+    file.close();
+    outputTextBox->setPlainText(fileContent);
+    }
+*/
 bool empt = false;
 
 MainWindow::MainWindow(QWidget *parent) {
@@ -97,6 +136,8 @@ MainWindow::MainWindow(QWidget *parent) {
     // Output Section
     outputLabel = new QLabel("Output");
     outputTextBox = new QTextEdit();
+    int spaceWidth = QFontMetrics(outputTextBox->font()).horizontalAdvance(' ');
+    outputTextBox->setTabStopDistance(4 * spaceWidth);
     outputTextBox->setReadOnly(1);
     outputTextBox->setPlaceholderText("Output Will Appear Here");
     saveFileButton = new QPushButton("Save File");
@@ -237,8 +278,14 @@ void MainWindow::drawGraph() {
     string filePath = saveToXml();
     QString imgPath1 = "graph.jpg";
     string imgPath = "graph.jpg";
-    //call graph function(filePath,imgPath)
-    outputTextBox->append("<img src='"+imgPath1+"' width='300' height='200' />");
+    Xml_to_Graph(filePath,imgPath);
+
+    QImage image(imgPath1);
+    if(image.isNull() || image.width() == 0 || image.height() == 0)
+    {
+        outputTextBox->setPlainText("The XML file is valid and no error correction is needed");
+    }
+    else outputTextBox->append("<img src='"+imgPath1+"' width='370' height='500' />");
 }
 
 void MainWindow::decomp() {
@@ -258,7 +305,47 @@ void MainWindow::mini() {
 
 void MainWindow::xml2json() {
     outputTextBox->clear();
-    string filePath = saveToXml();
+    string filePath = saveToXml();;
+    string outputPath = "output_json.json";
+    ifstream input(filePath);
+    Xml_to_Json(filePath, outputPath);
+
+    QFile file(outputPath.c_str());
+    if (!isValid(filePath))                   //if xml file not valid
+    {
+        outputTextBox->setPlainText("The XML file is INVALID, please input a valid file.....");
+        return;
+    }
+    if (!file.open(QIODevice::ReadWrite | QIODevice::Text)) {
+        QMessageBox::critical(this, "Error", "Unable to open file: " + file.errorString());
+        return;
+    }
+
+    // Read the file content
+    QString fileContent;
+    QTextStream in(&file);
+    fileContent = in.readAll();
+
+    if(fileContent == "0") {
+        outputTextBox->setPlainText("The XML file is Empty, please input a valid file.....");
+        file.close();
+    }
+
+
+    else{
+        // Perform edits on the file content (example: appending text)
+        //fileContent += "\nEdited content added to the file.";
+
+        // Write the modified content back to the file
+        file.resize(0); // Clear the file before writing
+        QTextStream out(&file);
+        out << fileContent;
+
+        file.close();
+
+        // Display the updated file content in the outputTextBox
+        outputTextBox->setPlainText(fileContent);
+    }
 }
 
 void MainWindow::pret() {
@@ -287,12 +374,11 @@ void MainWindow::valid() {
     QString output = QString::fromStdString(oss.str());
     //outputTextBox->setPlainText(output);
 
-    QMessageBox::information(this, "Info", output);
-
 
 
     if(!isValid(filePath))
-     {
+    {
+        QMessageBox::information(this, "Info", output);
         QString fileName =QString::fromStdString(filePath);
         if (!fileName.isEmpty()) {
             QFile file(fileName);

@@ -8,6 +8,7 @@
 #include <stack>
 #include <vector>
 #include <string>
+#include <cstdio>
 
 using namespace std;
 

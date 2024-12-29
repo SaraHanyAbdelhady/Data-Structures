@@ -6,6 +6,7 @@
 #include <string>
 
 #include "parseXML.h"
+#include "../Validity_checker/isValid.h"
 
 using namespace std;
 
@@ -16,10 +17,14 @@ void parseXML(const string& filename, vector<user>& users)
 {
 
     ifstream inputFile(filename);
-    // if error in opening xml file
-    if (!inputFile.is_open())
+    if (!isValid(filename))                   //if xml file not valid
     {
-        cout << "Unable to open input file: " << filename << std::endl;
+        cout << "The input file: " << filename << " is invalid please choose another one" << endl;
+        return;
+    }
+    if (!inputFile.is_open())               // if there is no file with this name in this path
+    {
+        cout << "Unable to open input file: " << filename << endl;
         return;
     }
     string line;                //to read line by line from the xml file

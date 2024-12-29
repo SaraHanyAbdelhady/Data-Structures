@@ -11,14 +11,20 @@ CONFIG += c++17
 SOURCES += \
     ../../Error_Correction/Error_Correction.cpp \
     ../../Validity_checker/isValid.cpp \
+    ../../Xml_to_Graph/Xml_to_Graph/Xml_to_Graph.cpp \
+    ../../Xml_to_Json/Xml_to_Json/Xml_to_Json.cpp \
     ../../most_active/most_active.cpp \
+    ../../parseXML/parseXML.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     ../../Error_Correction/Error_Correction.h \
     ../../Validity_checker/isValid.h \
+    ../../Xml_to_Graph/Xml_to_Graph/Xml_to_Graph.h \
+    ../../Xml_to_Json/Xml_to_Json/Xml_to_Json.h \
     ../../most_active/most_active.h \
+    ../../parseXML/parseXML.h \
     mainwindow.h
 
 FORMS += \

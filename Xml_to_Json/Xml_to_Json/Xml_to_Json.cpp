@@ -13,19 +13,22 @@ using namespace std;
 void Xml_to_Json(const string& input, const string& output) {
     ifstream inputFile(input);
     ofstream outputFile(output);
-    if (inputFile.tellg() == 0)                      //if there is no code in the file
+    /*if (inputFile.tellg() == 0)                      //if there is no code in the file
     {
-        cout << "The input file path " << input << "is empty. Please provide a valid file.\n";
+        cout << "The input file path " << input << " is empty. Please provide a valid file.\n";
+        outputFile<<"";
         return;
-    }
+    }*/
     if (!isValid(input))                   //if xml file not valid
     {
         cout << "The input file: " << input << " is invalid please choose another one" << endl;
+        outputFile<<"";
         return;
     }
     if (!inputFile.is_open())               // if there is no file with this name in this path
     {
         cout << "Unable to open input file: " << input << endl;
+        outputFile<<"";
         return;
     }
     if (!outputFile.is_open())              // if there is no file with this name in this path
@@ -272,7 +275,7 @@ void Xml_to_Json(const string& input, const string& output) {
     outputFile.close();
 }
 
-int main(int argc, char* argv[]) {
+/*int main(int argc, char* argv[]) {
     if (argc < 6) {
         cerr << "Usage: xml_editor json -i input_file.xml -o output_file.json\n";
         return 1;
@@ -299,7 +302,7 @@ int main(int argc, char* argv[]) {
         return 1;
     }
     return 0;
-}
+}*/
 
 //int main() {
 //    string inputFilePath = "../../Test_samples/Xml_to_Json/sample_invalid.xml";

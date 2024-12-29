@@ -59,13 +59,13 @@ void generateJPG(const string& dotFile, const string& jpgFile) {
 
 void Xml_to_Graph(const string& inputXML, const string& outputJpg) {
 
-    vector<user> graph; //as we pass it with reference 
-
+    vector<user> graph; //as we pass it with reference
+    remove(outputJpg.c_str());
     // Step 1: Parse XML file
     parseXML(inputXML, graph);
 
     // Step 2: Generate DOT file
-    string dotFile = "../../Test_samples/Xml_to_Graph/output1.dot";
+    string dotFile = "output.dot";
     generateDOT(graph, dotFile);
 
     // Step 3: Generate JPG image using Graphviz
@@ -73,7 +73,7 @@ void Xml_to_Graph(const string& inputXML, const string& outputJpg) {
 }
 
 // Main function to handle command-line arguments
-int main(int argc, char* argv[]) {
+/*int main(int argc, char* argv[]) {
     if (argc < 6) {
         cerr << "Usage: xml_editor <operation> -i <input_file> -o <output_file>\n";
         return 1;
@@ -100,7 +100,7 @@ int main(int argc, char* argv[]) {
         return 1;
     }
     return 0;
-}
+}*/
 //int main() {
 //    string inputXML = "../../Test_samples/Xml_to_Graph/sample1.xml";
 //    string outputJPG = "../../Test_samples/Xml_to_Graph/graph1.jpg";

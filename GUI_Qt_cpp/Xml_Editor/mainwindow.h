@@ -20,15 +20,18 @@
 #include <QString>
 #include <sstream>
 #include <iostream>
-#include<QPlainTextEdit>
+#include <QPlainTextEdit>
 #include <QTextCursor>
 #include <QTextBlockFormat>
 #include <QColor>
-#include<QTextBlock>
+#include <QTextBlock>
+#include <QFontMetrics>
 
 #include "../../Validity_checker/isValid.h"
 #include "../../most_active/most_active.h"
 #include "../../Error_Correction/Error_Correction.h"
+#include "../../Xml_to_Json/Xml_to_Json/Xml_to_Json.h"
+#include "../../Xml_to_Graph/Xml_to_Graph/Xml_to_Graph.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
