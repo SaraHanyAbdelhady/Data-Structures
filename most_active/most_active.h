@@ -8,6 +8,7 @@
 #include "parseXML.h"
 
 // Function to find and print the most active user based on the number of followers and following
-void most_active(const std::vector<user>& users);
+// Takes the XML file path as input
+void most_active(const std::string& filename);
 
 #endif // _MOST_ACTIVE_H_

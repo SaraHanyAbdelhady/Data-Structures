@@ -7,7 +7,12 @@
 using namespace std;
 
 // Function to find and print the most active user based on the number of followers and following
-void most_active(const vector<user>& users) {
+void most_active(const string& filename) {
+    vector<user> users; // Vector to store all users
+
+    // Parse the XML file to populate the users vector
+    parseXML(filename, users);
+
     if (users.empty()) {
         throw runtime_error("No users available to determine the most active user.");
     }
@@ -41,20 +46,28 @@ void most_active(const vector<user>& users) {
     }
 
     // Print the most active user's details
-    cout << "Name: " << mostActiveUser.name << "\n";
+    //cout << "Most Active User:\n";
     cout << "ID: " << mostActiveUser.ID << "\n";
+    cout << "Name: " << mostActiveUser.name << "\n";
+   // cout << "Number of Followers: " << mostActiveUser.followers.size() << "\n";
+    /*
+    // Calculate and output the number of users the active user is following
+    size_t followingCount = 0;
+    for (const auto& other : users) {
+        if (find(other.followers.begin(), other.followers.end(), mostActiveUser.ID) != other.followers.end()) {
+            followingCount++;
+        }
+    }
+    cout << "Number of Following: " << followingCount << "\n";
+    */
 }
-/*
-int main() {
-    vector<user> users; // Vector to store all users
 
-    // Parse the XML file to populate the users vector
+int main() {
     string filename = "input.xml"; // Update with the actual path to your XML file
-    parseXML(filename, users);
 
     try {
         // Find and print the most active user
-        most_active(users);
+        most_active(filename);
     }
     catch (const exception& e) {
         // Handle any errors that occur (e.g., no users available)
@@ -63,4 +76,3 @@ int main() {
 
     return 0; // End of the program
 }
-*/
