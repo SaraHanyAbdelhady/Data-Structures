@@ -1,11 +1,13 @@
-/*#include <iostream>
+#include <iostream>
 #include <vector>
+#include <stdexcept>
+#include <algorithm>
 #include "parseXML.h"
 
 using namespace std;
 
-// Function to find the most active user based on the number of followers and following
-user most_active(const vector<user>& users) {
+// Function to find and print the most active user based on the number of followers and following
+void most_active(const vector<user>& users) {
     if (users.empty()) {
         throw runtime_error("No users available to determine the most active user.");
     }
@@ -38,9 +40,11 @@ user most_active(const vector<user>& users) {
         }
     }
 
-    return mostActiveUser; // Return the user with the most connections
+    // Print the most active user's details
+    cout << "Name: " << mostActiveUser.name << "\n";
+    cout << "ID: " << mostActiveUser.ID << "\n";
 }
-
+/*
 int main() {
     vector<user> users; // Vector to store all users
 
@@ -49,25 +53,8 @@ int main() {
     parseXML(filename, users);
 
     try {
-        // Find the most active user based on the number of followers and following
-        user activeUser = most_active(users);
-
-        // Output the result
-        cout << "Most Active User:\n";
-        cout << "ID: " << activeUser.ID << "\n"; // Output user ID
-        cout << "Name: " << activeUser.name << "\n"; // Output user name
-        cout << "Number of Followers: " << activeUser.followers.size() << "\n"; // Output number of followers
-
-        // Calculate and output the number of users the active user is following
-        size_t followingCount = 0;
-        for (const auto& other : users) {
-            // Check if the most active user ID exists in the followers list of another user
-            if (find(other.followers.begin(), other.followers.end(), activeUser.ID) != other.followers.end()) {
-                followingCount++;
-            }
-        }
-        cout << "Number of Following: " << followingCount << "\n"; // Output number of users they follow
-
+        // Find and print the most active user
+        most_active(users);
     }
     catch (const exception& e) {
         // Handle any errors that occur (e.g., no users available)
