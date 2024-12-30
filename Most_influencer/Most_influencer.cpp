@@ -1,29 +1,24 @@
-
 #include <iostream>
-#include <fstream>
-#include <stack>
 #include <vector>
 #include <string>
-#include "parseXML"
-#include "parseXML.h"
-
+#include "Most_influencer.h"
 using namespace std;
 
+void Most_influencers(const string& path) {
+    vector<user> users;
+    // Parse the XML file and populate the 'users' vector
+    parseXML(path, users);
 
-void Most_influencers(vector<user> most_influencers,string path){
-    // Parse the XML file and populate the 'most_influencers' vector
-    parseXML(path, most_influencers);
-
-    if (most_influencers.empty()) {
+    if (users.empty()) {
         cout << "No users found in the XML file." << endl;
-
+        return; // Early return to avoid unnecessary code execution
     }
 
     // Find the user with the most followers
     int max_followers = 0;
     user most_influential_user;
 
-    for (const auto& u : most_influencers) {
+    for (const auto& u : users) {
         if (u.followers.size() > max_followers) {
             max_followers = u.followers.size();
             most_influential_user = u;
@@ -34,8 +29,5 @@ void Most_influencers(vector<user> most_influencers,string path){
     cout << "Most influential user: " << endl;
     cout << "ID: " << most_influential_user.ID << endl;
     cout << "Name: " << most_influential_user.name << endl;
-    cout << "the number of followers user: " <<max_followers <<endl;
+    cout << "Number of followers: " << max_followers << endl;
 }
-
-
-
