@@ -127,7 +127,7 @@ closings.pop();
         cout<< "The Number of errors are "<<unOpened.size()+ unClosed.size()<< "\n";
 
     }
-    else cout<< "The XML file is valid ";
+    else cout<< "The XML file is valid "<<"\n";
     return unClosed.empty()&&unOpened.empty();
 
    }

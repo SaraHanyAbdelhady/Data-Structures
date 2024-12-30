@@ -6,12 +6,13 @@ using namespace std;
 
 
 // Function to generate a DOT file for Graphviz
-void generateDOT(const vector<user>& graph, const string& outputFile) {
+void generateDOT(const vector<user>& graph, const string& outputFile, bool& done) {
 
     ofstream file(outputFile);
     // if error in opening output file
     if (!file.is_open()) {
         cout << "Error opening file for DOT output!" << endl;
+        done = false;
         exit(1);
     }
     //display data in dot form 
@@ -39,25 +40,28 @@ void generateDOT(const vector<user>& graph, const string& outputFile) {
     file << "}\n";
 
     file.close();
+    done = true;
     cout << "DOT file generated: " << outputFile << endl;
 }
 
 // Function to generate a JPG image using Graphviz
-void generateJPG(const string& dotFile, const string& jpgFile) {
+void generateJPG(const string& dotFile, const string& jpgFile, bool& done) {
     // generating cmd command line to call Graphviz
     string command = "dot -Tjpg " + dotFile + " -o " + jpgFile;
 
     int result = system(command.c_str());   // call Graphviz using cmd
     if (result == 0) {
         cout << "Graph image generated: " << jpgFile << endl;
+        done = true;
     }
     else {
         //if cmd returns a string it means an error occured when calling Graphviz
         cout << "Error generating JPG file. Ensure Graphviz is installed!" << endl;
+        done = false;
     }
 }
 
-void Xml_to_Graph(const string& inputXML, const string& outputJpg) {
+void Xml_to_Graph(const string& inputXML, const string& outputJpg,bool&done) {
 
     vector<user> graph; //as we pass it with reference
     remove(outputJpg.c_str());
@@ -66,10 +70,10 @@ void Xml_to_Graph(const string& inputXML, const string& outputJpg) {
 
     // Step 2: Generate DOT file
     string dotFile = "output.dot";
-    generateDOT(graph, dotFile);
-
+    generateDOT(graph, dotFile,done);
+    if(!done)return;
     // Step 3: Generate JPG image using Graphviz
-    generateJPG(dotFile, outputJpg);
+    generateJPG(dotFile, outputJpg,done);
 }
 
 // Main function to handle command-line arguments

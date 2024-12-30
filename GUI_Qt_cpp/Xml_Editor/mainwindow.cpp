@@ -55,7 +55,7 @@ MainWindow::MainWindow(QWidget *parent) {
     connect(loadFileButton, &QPushButton::clicked, this, &MainWindow::loadFile);
 
     
-   // inputTextBox->setPlainText("Line 1\nLine 2\nLine 3\nLine 4");
+    // inputTextBox->setPlainText("Line 1\nLine 2\nLine 3\nLine 4");
 
 
     inputLayout = new QVBoxLayout();
@@ -210,7 +210,7 @@ string MainWindow::saveToXml() {
     for (const QString &line : lines) {
         int x = line.toStdString().find(":");
         string trimmedLine = line.toStdString();
-        if(x>-1 && x<line.toStdString().length()) trimmedLine  = line.toStdString().substr(x+1);
+        if(x > -1 && x < line.toStdString().length()) trimmedLine  = line.toStdString().substr(x+1);
         //QString trimmedLine = line.section(':', 1).trimmed(); // Remove the part before and including ':'
         if (!trimmedLine.empty()) {
 
@@ -276,21 +276,38 @@ void MainWindow::searchAction() {
 void MainWindow::drawGraph() {
     outputTextBox->clear();
     string filePath = saveToXml();
+    bool done = false;
     QString imgPath1 = "graph.jpg";
     string imgPath = "graph.jpg";
-    Xml_to_Graph(filePath,imgPath);
+    // Redirect std::cout
+    std::stringstream buffer;
+    std::streambuf *oldCoutBuffer = std::cout.rdbuf(buffer.rdbuf());
 
-    QImage image(imgPath1);
-    if(image.isNull() || image.width() == 0 || image.height() == 0)
+    // Call the function
+    Xml_to_Graph(filePath,imgPath,done);
+
+    // Restore std::cout
+    std::cout.rdbuf(oldCoutBuffer);
+
+    // Check if there was any output
+    QString output = QString::fromStdString(buffer.str());
+    if(!isValid(filePath)&&!empt)
     {
-        outputTextBox->setPlainText("The XML file is valid and no error correction is needed");
+        outputTextBox->setPlainText("The XML file is INVALID, please input a valid file.....");
     }
-    else outputTextBox->append("<img src='"+imgPath1+"' width='370' height='500' />");
+    else if(empt) {
+        outputTextBox->setPlainText("The XML file is Empty, please input a valid file.....");
+    }
+    else if (!done) {
+        outputTextBox->setPlainText(output);
+    }
+    else {
+        outputTextBox->append("<img src='"+imgPath1+"' width='370' height='500' />");
+    }
 }
 
 void MainWindow::decomp() {
     outputTextBox->clear();
-
 }
 
 void MainWindow::comp() {
@@ -308,43 +325,57 @@ void MainWindow::xml2json() {
     string filePath = saveToXml();;
     string outputPath = "output_json.json";
     ifstream input(filePath);
+
+
+    // Redirect std::cout
+    std::stringstream buffer;
+    std::streambuf *oldCoutBuffer = std::cout.rdbuf(buffer.rdbuf());
+
+    // Call the function
     Xml_to_Json(filePath, outputPath);
 
-    QFile file(outputPath.c_str());
-    if (!isValid(filePath))                   //if xml file not valid
-    {
-        outputTextBox->setPlainText("The XML file is INVALID, please input a valid file.....");
-        return;
+    // Restore std::cout
+    std::cout.rdbuf(oldCoutBuffer);
+
+    // Check if there was any output
+    QString output = QString::fromStdString(buffer.str());
+
+    if (!output.isEmpty()) {
+        outputTextBox->setPlainText(output);
     }
-    if (!file.open(QIODevice::ReadWrite | QIODevice::Text)) {
-        QMessageBox::critical(this, "Error", "Unable to open file: " + file.errorString());
-        return;
-    }
+    else {
+        QFile file(outputPath.c_str());
 
-    // Read the file content
-    QString fileContent;
-    QTextStream in(&file);
-    fileContent = in.readAll();
+        if (!file.open(QIODevice::ReadWrite | QIODevice::Text)) {
+            QMessageBox::critical(this, "Error", "Unable to open file: " + file.errorString());
+            return;
+        }
 
-    if(fileContent == "0") {
-        outputTextBox->setPlainText("The XML file is Empty, please input a valid file.....");
-        file.close();
-    }
+        // Read the file content
+        QString fileContent;
+        QTextStream in(&file);
+        fileContent = in.readAll();
+
+        if(fileContent == "0") {
+            outputTextBox->setPlainText("The XML file is Empty, please input a valid file.....");
+            file.close();
+        }
 
 
-    else{
-        // Perform edits on the file content (example: appending text)
-        //fileContent += "\nEdited content added to the file.";
+        else{
+            // Perform edits on the file content (example: appending text)
+            //fileContent += "\nEdited content added to the file.";
 
-        // Write the modified content back to the file
-        file.resize(0); // Clear the file before writing
-        QTextStream out(&file);
-        out << fileContent;
+            // Write the modified content back to the file
+            file.resize(0); // Clear the file before writing
+            QTextStream out(&file);
+            out << fileContent;
 
-        file.close();
+            file.close();
 
-        // Display the updated file content in the outputTextBox
-        outputTextBox->setPlainText(fileContent);
+            // Display the updated file content in the outputTextBox
+            outputTextBox->setPlainText(fileContent);
+        }
     }
 }
 
@@ -393,19 +424,19 @@ void MainWindow::valid() {
         }
         stack<pair<string, long long>> copy = unClosed;
         while(!copy.empty())
-    {
-             highlightLine(outputTextBox,copy.top().second-1);
+        {
+            highlightLine(outputTextBox,copy.top().second-1);
             qInfo() << copy.top().first<<"\n";
             qInfo() << copy.top().second<<"\n";
             copy.pop();
-    }//stack
+        }//stack
         if(!unOpened.empty())
-    {    for(long long k=0;k<unOpened.size();k++)
-        {
-        highlightLine(outputTextBox, unOpened[k].first-1);
-        qInfo() <<unOpened[k].second<<"\n";
-        qInfo() <<unOpened[k].first<<"\n";
-        }//vector
+        {    for(long long k=0;k<unOpened.size();k++)
+            {
+                highlightLine(outputTextBox, unOpened[k].first-1);
+                qInfo() <<unOpened[k].second<<"\n";
+                qInfo() <<unOpened[k].first<<"\n";
+            }//vector
         }
     }
 
@@ -415,11 +446,11 @@ void MainWindow::valid() {
 void MainWindow::corr() {
     outputTextBox->clear();
 
-        // Save input to an XML file
-        string filePath = saveToXml();
-        string outputPath = "sample4Soln.txt";
+    // Save input to an XML file
+    string filePath = saveToXml();
+    string outputPath = "sample4Soln.txt";
 
-         errorCorrection(filePath, outputPath);
+    errorCorrection(filePath, outputPath);
 
     QFile file(outputPath.c_str());
     if (!file.open(QIODevice::ReadWrite | QIODevice::Text)) {
@@ -434,23 +465,23 @@ void MainWindow::corr() {
 
     if(fileContent == "0") {
         outputTextBox->setPlainText("The XML file is valid and no error correction is needed");
-         file.close();
+        file.close();
     }
 
 
     else{
-    // Perform edits on the file content (example: appending text)
-    //fileContent += "\nEdited content added to the file.";
+        // Perform edits on the file content (example: appending text)
+        //fileContent += "\nEdited content added to the file.";
 
-    // Write the modified content back to the file
-    file.resize(0); // Clear the file before writing
-    QTextStream out(&file);
-    out << fileContent;
+        // Write the modified content back to the file
+        file.resize(0); // Clear the file before writing
+        QTextStream out(&file);
+        out << fileContent;
 
-    file.close();
+        file.close();
 
-    // Display the updated file content in the outputTextBox
-    outputTextBox->setPlainText(fileContent);
+        // Display the updated file content in the outputTextBox
+        outputTextBox->setPlainText(fileContent);
     }
 }
 
