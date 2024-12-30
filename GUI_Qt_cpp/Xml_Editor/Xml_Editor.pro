@@ -13,7 +13,7 @@ SOURCES += \
     ../../Validity_checker/isValid.cpp \
     ../../Xml_to_Graph/Xml_to_Graph/Xml_to_Graph.cpp \
     ../../Xml_to_Json/Xml_to_Json/Xml_to_Json.cpp \
-    ../../most_active/most_active.cpp \
+    ../../compress_decompress/compress_decompress.cpp \
     ../../parseXML/parseXML.cpp \
     main.cpp \
     mainwindow.cpp
@@ -21,9 +21,13 @@ SOURCES += \
 HEADERS += \
     ../../Error_Correction/Error_Correction.h \
     ../../Validity_checker/isValid.h \
+    ../../Validity_checker/isValid.h \
     ../../Xml_to_Graph/Xml_to_Graph/Xml_to_Graph.h \
+    ../../compress_decompress/compress_decompress.h \
+    ../../compress_decompress/compress_decompress.h \
+    ../../compress_decompress/compress_decompress.h \
     ../../Xml_to_Json/Xml_to_Json/Xml_to_Json.h \
-    ../../most_active/most_active.h \
+    ../../Xml_to_Json/Xml_to_Json/Xml_to_Json.h \
     ../../parseXML/parseXML.h \
     mainwindow.h
 

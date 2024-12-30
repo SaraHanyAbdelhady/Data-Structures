@@ -28,7 +28,7 @@
 #include <QFontMetrics>
 
 #include "../../Validity_checker/isValid.h"
-#include "../../most_active/most_active.h"
+//#include "../../most_active/most_active.h"
 #include "../../Error_Correction/Error_Correction.h"
 #include "../../Xml_to_Json/Xml_to_Json/Xml_to_Json.h"
 #include "../../Xml_to_Graph/Xml_to_Graph/Xml_to_Graph.h"

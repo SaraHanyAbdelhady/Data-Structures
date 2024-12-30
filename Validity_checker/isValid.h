@@ -4,6 +4,7 @@
 
 #include <string>
 #include <stack>
+# include <vector>
 using namespace std;
 
 extern stack<pair<string, long long>> unClosed; // Declaration of global variable
