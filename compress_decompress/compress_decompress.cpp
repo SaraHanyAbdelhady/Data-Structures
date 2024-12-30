@@ -7,7 +7,7 @@
 using namespace std;
 
 // Function to compress a file using LZW encoding
-void compress(const string& inputFileName, const string& outputFileName) {
+void compressing(const string& inputFileName, const string& outputFileName) {
     ifstream inputFile(inputFileName, ios::binary | ios::ate);
 
     if (!inputFile.is_open()) {
@@ -68,7 +68,7 @@ void compress(const string& inputFileName, const string& outputFileName) {
 }
 
 // Function to decompress a file using LZW encoding
-void decompress(const string& inputFileName, const string& outputFileName) {
+void decompressing(const string& inputFileName, const string& outputFileName) {
     ifstream inputFile(inputFileName, ios::binary);
     ofstream outputFile(outputFileName, ios::binary);
 
@@ -116,7 +116,8 @@ void decompress(const string& inputFileName, const string& outputFileName) {
 }
 
 // Main function to handle command-line arguments
-int main(int argc, char* argv[]) {
+/*
+ int main(int argc, char* argv[]) {
     if (argc < 5) {
         cout << argv[0];
         cerr << "Usage: xml_editor <operation> -i <input_file> -o <output_file>\n";
@@ -149,3 +150,4 @@ int main(int argc, char* argv[]) {
 
     return 0;
 }
+*/
