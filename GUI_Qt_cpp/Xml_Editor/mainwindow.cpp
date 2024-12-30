@@ -350,11 +350,59 @@ void MainWindow::drawGraph() {
 
 void MainWindow::decomp() {
     outputTextBox->clear();
+
+    // Input compressed file path and output decompressed file path
+    std::string inputPath = "output.comp"; // Assuming this is the compressed file
+    std::string outputPath = "decompressed.xml";
+
+    // Call the decompressing function
+    decompressing(inputPath, outputPath);
+
+    // Open the output file using QFile
+    QFile file(outputPath.c_str());
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        outputTextBox->setPlainText("Error: Unable to open the decompressed file.");
+        return;
+    }
+
+    // Read the content of the file
+    QTextStream in(&file);
+    QString fileContent = in.readAll();
+    file.close();
+
+    // Display the decompressed content
+    outputTextBox->setPlainText("Decompression Completed\n" + fileContent);
 }
+
 
 void MainWindow::comp() {
     outputTextBox->clear();
-    string filePath = saveToXml();
+
+    // Save the XML file and get the file path
+    std::string filePath = saveToXml();
+    std::string outputPath = "output.comp";
+
+    // Call the compressing function
+    compressing(filePath, outputPath);
+
+    // Open the output file using QFile
+    QFile file(outputPath.c_str());
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        outputTextBox->setPlainText("Error: Unable to open the output file.");
+        return;
+    }
+
+    // Read the content of the file
+    QTextStream in(&file);
+    QString fileContent = in.readAll();
+    file.close();
+
+    // Check the content of the output file
+    if (fileContent.trimmed() == "0") {
+        outputTextBox->setPlainText("The XML file is valid and no error correction is needed");
+    } else {
+        outputTextBox->setPlainText("Compression Completed\n" + fileContent);
+    }
 }
 
 void MainWindow::mini() {
