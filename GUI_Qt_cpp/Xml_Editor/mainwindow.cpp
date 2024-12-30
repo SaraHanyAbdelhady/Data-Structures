@@ -239,24 +239,66 @@ void MainWindow::networkanalysisAction() {
     QComboBox *dropdown = qobject_cast<QComboBox *>(sender());
     string filePath = saveToXml();
     outputTextBox->clear();
-    if (dropdown->currentIndex() == 0){
-        // call "Most Active"
-        //outputTextBox->append(lw elfunction void nadoha hena);
-        // Redirect cout to a string stream
 
+    // Redirect cout to capture output
+    std::ostringstream oss;
+    std::streambuf* oldCoutBuffer = std::cout.rdbuf(oss.rdbuf());
+
+    if (dropdown->currentIndex() == 0) {
+        // Call "Most Active"
+        most_active(filePath);
+        std::cout.rdbuf(oldCoutBuffer);  // Restore the original cout buffer
+
+        // Get the output and append it to QTextEdit
+        QString output = QString::fromStdString(oss.str());
+        outputTextBox->setPlainText("Most Active Users:\n" + output);
     }
-    else if (dropdown->currentIndex() == 1){
-        // call "Most Infleuncer"
-        //outputTextBox->append(lw elfunction void nadoha hena);
+    else if (dropdown->currentIndex() == 1) {
+        // Call "Most Influencer"
+        Most_influencers(filePath);
+        std::cout.rdbuf(oldCoutBuffer);  // Restore the original cout buffer
+
+        // Get the output and append it to QTextEdit
+        QString output = QString::fromStdString(oss.str());
+        outputTextBox->setPlainText("Most Influencer Users:\n" + output);
     }
-    else if (dropdown->currentIndex() == 2){
-        // call "Mutual Users"
-        //outputTextBox->append(lw elfunction void nadoha hena);
+    else if (dropdown->currentIndex() == 2) {
+        // Call "Mutual Users"
+        list<string> mutualUsers = mutual(filePath, 1, 2, 3);  // Example user IDs
+
+        // Convert list<string> to QString
+        QString output;
+        if (mutualUsers.empty()) {
+            output = "No Mutual Users found.";
+        } else {
+            output = "Mutual Users:\n";
+            for (const auto& userName : mutualUsers) {
+                output += QString::fromStdString(userName) + "\n";
+            }
+        }
+
+        outputTextBox->setPlainText(output);
     }
-    else if (dropdown->currentIndex() == 3){
-        // call "Suggested Users"
-        //outputTextBox->append(lw elfunction void nadoha hena);
+    else if (dropdown->currentIndex() == 3) {
+        // Call "Suggested Users"
+        list<string> suggestedUsers = suggested_users(filePath, 1);  // Example user ID
+
+        // Convert list<string> to QString
+        QString output;
+        if (suggestedUsers.empty()) {
+            output = "No Suggested Users found.";
+        } else {
+            output = "Suggested Users:\n";
+            for (const auto& userName : suggestedUsers) {
+                output += QString::fromStdString(userName) + "\n";
+            }
+        }
+
+        outputTextBox->setPlainText(output);
     }
+
+    // Restore the original cout buffer
+    std::cout.rdbuf(oldCoutBuffer);
 }
 
 void MainWindow::searchAction() {
