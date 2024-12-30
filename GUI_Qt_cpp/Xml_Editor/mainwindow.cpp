@@ -358,45 +358,7 @@ void MainWindow::comp() {
 }
 
 void MainWindow::mini() {
-    outputTextBox->clear();
-
-    // Save the XML file and get the file path
-    std::string filePath = saveToXml();
-    std::string outputPath = "output.xml";
-
-    // Open input and output file streams
-    std::ifstream input_file(filePath);
-    std::ofstream output_file(outputPath);
-
-    if (!input_file.is_open() || !output_file.is_open()) {
-        outputTextBox->setPlainText("Error: Unable to open input or output file.");
-        return;
-    }
-
-    // Minify the file
-    Minifyingg(input_file, output_file);
-
-    // Close the file streams after use
-    input_file.close();
-    output_file.close();
-
-    // Open the output file for reading
-    QFile file(outputPath.c_str());
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        outputTextBox->setPlainText("Error: Unable to read the output file.");
-        return;
-    }
-
-    // Read the content of the file
-    QTextStream in(&file);
-    QString fileContent = in.readAll();
-    file.close();
-
-    if (fileContent.trimmed() == "0") {
-        outputTextBox->setPlainText("The XML file is valid and no error correction is needed");
-    } else {
-        outputTextBox->setPlainText("Minifying Done\n" + fileContent);
-    }
+    
 }
 
 void MainWindow::xml2json() {
@@ -460,26 +422,7 @@ void MainWindow::xml2json() {
 
 void MainWindow::pret() {
 
-    std::string filePath = saveToXml();
-    std::string outputPath = "output.xml";
-    format_XML(filePath, outputPath);
-    // Open the output file for reading
-    QFile file(outputPath.c_str());
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        outputTextBox->setPlainText("Error: Unable to read the output file.");
-        return;
-    }
-
-    // Read the content of the file
-    QTextStream in(&file);
-    QString fileContent = in.readAll();
-    file.close();
-
-    if (fileContent.trimmed() == "0") {
-        outputTextBox->setPlainText("The XML file is valid and no error correction is needed");
-    } else {
-        outputTextBox->setPlainText("Prettifying Done\n" + fileContent);
-    }
+    
 
 }
 
