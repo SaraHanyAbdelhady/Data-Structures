@@ -6,4 +6,4 @@
 #include <cctype>
 #include <algorithm>
 using namespace std;
-void Minifying(ifstream& input_file, ofstream& output_file);
+void Minifyingg(ifstream& input_file, ofstream& output_file);

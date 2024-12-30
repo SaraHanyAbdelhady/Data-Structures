@@ -1,4 +1,5 @@
 #include "Minifying.h"
+/*
 int main()
 {
     ifstream file1("input_file.xml");
@@ -8,7 +9,8 @@ int main()
     file2.close();
     return 0;
 }
-void Minifying(ifstream& input_file, ofstream& output_file) {
+*/
+void Minifyingg(ifstream& input_file, ofstream& output_file) {
     stringstream buffer;
     buffer << input_file.rdbuf();
     string fileContent = buffer.str();
@@ -94,4 +96,3 @@ void Minifying(ifstream& input_file, ofstream& output_file) {
         result.pop();
     }
 }
-
