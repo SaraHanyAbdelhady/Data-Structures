@@ -1,6 +1,4 @@
-#include <iostream>
-#include <fstream>
-#include <string>
+#include "format_xml.h"
 using namespace std;
 // Function to trim leading and trailing spaces
 string trim(const string &str) {
@@ -10,10 +8,15 @@ string trim(const string &str) {
 }
 
 // Function to format XML
-void formatXML(const string &inputFile, const string &outputFile) {
+void format_XML(const string &inputFile, const string &outputFile) {
     ifstream inFile(inputFile);
     ofstream outFile(outputFile);
-
+    if (!isValid(inputFile))                   //if xml file not valid
+    {
+        cout << "The input file: " << input << " is invalid please choose another one" << endl;
+        outputFile<<"";
+        return;
+    }
     if (!inFile.is_open()) {
         cout << "Error: Cannot open input file " << inputFile << endl;
         return;
@@ -78,7 +81,7 @@ void formatXML(const string &inputFile, const string &outputFile) {
     inFile.close();
     outFile.close();
 }
-
+/*
 int main() {
     string inputFile = "example.txt";   // Input XML file
     string outputFile = "output.txt"; // Output XML file
@@ -87,3 +90,4 @@ int main() {
 
     return 0;
 }
+*/
