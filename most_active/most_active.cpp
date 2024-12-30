@@ -1,9 +1,7 @@
 #include <iostream>
 #include <vector>
-#include <stdexcept>
 #include <algorithm>
-#include "parseXML.h"
-
+#include "most_active.h"
 using namespace std;
 
 // Function to find and print the most active user based on the number of followers and following
@@ -14,7 +12,8 @@ void most_active(const string& filename) {
     parseXML(filename, users);
 
     if (users.empty()) {
-        throw runtime_error("No users available to determine the most active user.");
+        cout << "Error: No users available to determine the most active user." << endl;
+        return; // Early return if no users exist
     }
 
     // Define the most active user as the one with the greatest number of followers and following
@@ -45,12 +44,12 @@ void most_active(const string& filename) {
         }
     }
 
-    // Print the most active user's details
-    //cout << "Most Active User:\n";
+    // Output the most active user's details
+    cout << "Most Active User:\n";
     cout << "ID: " << mostActiveUser.ID << "\n";
     cout << "Name: " << mostActiveUser.name << "\n";
-   // cout << "Number of Followers: " << mostActiveUser.followers.size() << "\n";
-    /*
+    cout << "Number of Followers: " << mostActiveUser.followers.size() << "\n";
+
     // Calculate and output the number of users the active user is following
     size_t followingCount = 0;
     for (const auto& other : users) {
@@ -59,20 +58,4 @@ void most_active(const string& filename) {
         }
     }
     cout << "Number of Following: " << followingCount << "\n";
-    */
-}
-
-int main() {
-    string filename = "input.xml"; // Update with the actual path to your XML file
-
-    try {
-        // Find and print the most active user
-        most_active(filename);
-    }
-    catch (const exception& e) {
-        // Handle any errors that occur (e.g., no users available)
-        cout << "Error: " << e.what() << endl;
-    }
-
-    return 0; // End of the program
 }
