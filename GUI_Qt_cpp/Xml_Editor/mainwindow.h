@@ -36,6 +36,7 @@
 #include "../../Formatting_XML/format_xml.h"
 #include "../../Mutual_Users/Mutual_Users.h"
 #include "../../Search/wordSearch.h"
+#include "../../Search/topicSearch.h"
 #include "../../compress_decompress/compress_decompress.h"
 #include "../../Suggested_users/Suggested_users.h"
 #include "../../Most_influencer/Most_influencer.h"
