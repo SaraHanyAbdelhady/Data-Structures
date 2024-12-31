@@ -14,26 +14,28 @@ int main(int argc, char *argv[]) {
 
     // Check if "--cmd" or "--gui" argument is passed to the program
     for (int i = 1; i < argc; ++i) {
-        if (QString(argv[i]) == "--cmd") {
+        if (QString(argv[i]) == "--cli") {
             cmdMode = true;
+            qDebug() << "Command-line mode enabled.";
             break;
         } else if (QString(argv[i]) == "--gui") {
             guiMode = true;
+            qDebug() << "GUI mode enabled.";
             break;
         }
     }
 
     if (cmdMode) {
-        // Command-Line Mode
-        QCoreApplication app(argc, argv); // Initialize Qt's core application
-        qDebug() << "Running in CMD mode...";
-
+        // Command-Line Mode (no QApplication needed)
+        std::cout << "=====================================" << std::endl;
+        std::cout << "      XML Editor: CMD Mode Active   "<<argc << std::endl;
+        std::cout << "=====================================" << std::endl;
         if (argc < 3) {
             std::cerr << "Usage: xml_editor <command> <options>" << std::endl;
             return 1;
         }
 
-        std::string command = argv[1];
+        std::string command = argv[2];
         std::string inputFile;
         std::string outputFile;
         bool fix = false;
@@ -42,8 +44,7 @@ int main(int argc, char *argv[]) {
         std::string word;
         std::string topic;
 
-        // Parsing command-line arguments
-        for (int i = 2; i < argc; ++i) {
+        for (int i = 3; i < argc; ++i) {
             std::string arg = argv[i];
             if (arg == "-i" && i + 1 < argc) {
                 inputFile = argv[++i];
@@ -70,14 +71,84 @@ int main(int argc, char *argv[]) {
             }
         }
 
-        // Handling specific commands
+        // Your various commands processing logic here
         if (command == "verify") {
             std::cout << "Starting tag validation..." << std::endl;
             isValid(inputFile); // Assuming isValid is defined elsewhere
-        }
-        // Handle other commands here...
 
-        return app.exec();  // Enter the event loop for CMD mode (though it's uncommon to use GUI components in this mode)
+            std::cout << "Unclosed tags:" << std::endl;
+            while (!unClosed.empty()) {
+                std::cout << unClosed.top().first << " " << unClosed.top().second << std::endl;
+                unClosed.pop();
+            }
+
+            std::cout << "Unopened tags:" << std::endl;
+            for (const auto& tag : unOpened) {
+                std::cout << tag.second << " " << tag.first << std::endl;
+            }
+        } else if (command == "format") {
+            std::cout << "Starting tag formatting..." << std::endl;
+            format_XML(inputFile, outputFile);
+        } else if (command == "json") {
+            std::cout << "Starting tag convertion to json..." << std::endl;
+            Xml_to_Json(inputFile, outputFile);
+        } else if (command == "mini") {
+             std::cout << "Starting tag Minifing..." << std::endl;
+            std::ifstream input_file(inputFile);
+            std::ofstream output_file(outputFile);
+            Minifyingg(input_file, output_file);
+        } else if (command == "compress") {
+             std::cout << "Starting Compressing..." << std::endl;
+            compressing(inputFile, outputFile);
+        } else if (command == "decompress") {
+             std::cout << "Starting deCompressing..." << std::endl;
+            decompressing(inputFile, outputFile);
+        } else if (command == "draw") {
+             std::cout << "Starting Drawing graph..." << std::endl;
+            Xml_to_Graph(inputFile, outputFile);
+        } else if (command == "most_active") {
+             std::cout << "Starting getting the most active user..." << std::endl;
+            most_active(inputFile);
+        } else if (command == "most_influencer") {
+            std::cout << "Starting getting the most influncer..." << std::endl;
+            Most_influencers(inputFile);
+        } else if (command == "mutual") {
+            std::cout << "Starting getting the mutual..." << std::endl;
+
+            // Call the mutual function by extracting elements from the vector
+            std::list<std::string> values = mutual(inputFile, ids[0], ids[1], ids[2]);
+
+            if (values.empty()) {
+                std::cout << "No mutual values found for the given IDs." << std::endl;
+            } else {
+                // Output the results
+                std::cout << "Mutual values for the given IDs:\n";
+                for (const std::string& value : values) {
+                    std::cout << value << std::endl;
+                }
+            }
+
+        } else if (command == "suggest") {
+            std::list<std::string> values = suggested_users(inputFile, userId);
+
+            if (values.empty()) {
+                std::cout << "No suggested users found for the given ID." << std::endl;
+            } else {
+                std::cout << "Suggested users for the given ID:\n";
+                for (const std::string& value : values) {
+                    std::cout << value << std::endl;
+                }
+            }
+        } else if (command == "search" && !word.empty()) {
+            wordSearch(inputFile, word);
+        } else if (command == "search" && !topic.empty()) {
+            topicSearch(inputFile, topic);
+        } else {
+            std::cerr << "Unknown command or invalid options." << std::endl;
+            return 1;
+        }
+        return 0;
+
     } else if (guiMode) {
         // GUI Mode
         QApplication app(argc, argv);  // Initialize the Qt application
@@ -85,9 +156,9 @@ int main(int argc, char *argv[]) {
         window.resize(1000, 600);  // Set the window size
         window.show();  // Display the window
         return app.exec();  // Enter the event loop for GUI mode
+
     } else {
-        std::cerr << "No valid mode specified. Use --cmd or --gui." << std::endl;
+        std::cerr << "No valid mode specified. Use --cli or --gui." << std::endl;
         return 1;
     }
 }
-
