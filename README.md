@@ -48,12 +48,13 @@ This project is a comprehensive desktop application for processing and visualizi
 ---
 
 ## ⚙️ Usage
-
+Switch between CLI and GUI modes using command-line flags
 ### 💻 Command-Line Mode
 The application supports various commands:  
-- **Verify XML**:  
+### Verify XML:  
   ```bash
   xml_editor verify -i input_file.xml [-f] [-o output_file.xml]
+```
 ### 🔄 Convert XML to JSON:
   ```bash
 xml_editor json -i input_file.xml -o output_file.json
@@ -75,22 +76,27 @@ xml_editor decompress -i input_file.comp -o output_file.xml
 
 ### 🏆 Find Most Active User
 ```bash
-xml_editor most_active -i input_file.xml
+xml_editor --cli most_active -i input_file.xml
 ```
 ### 🌟 Find Most Influencer User
 ```bash
-xml_editor most_influencer -i input_file.xml
+xml_editor --cli most_influencer -i input_file.xml
 ```
 ### 🤝 Find Mutual Followers
 ```bash
-xml_editor mutual -i input_file.xml -ids 1,2,3
+xml_editor --cli mutual -i input_file.xml -ids 1,2,3
 ```
 ### 🔗 Suggest Users to Follow
 ``` bash
-xml_editor suggest -i input_file.xml -id 1
+xml_editor --cli suggest -i input_file.xml -id 1
 ```
+
 ### 🖥️ GUI Mode
+``` bash
+xml_editor --gui
+```
 - **File Upload**: Use the browse button to upload XML files.
 - **Operations**: Click buttons to perform operations like prettifying, minifying, or converting XML.
 - **View Results**: View operation results in a read-only text area.
 - **Save Outputs**: Save processed files to your desired location.
+
