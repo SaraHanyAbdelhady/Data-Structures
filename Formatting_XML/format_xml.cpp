@@ -13,8 +13,8 @@ void format_XML(const string &inputFile, const string &outputFile) {
     ofstream outFile(outputFile);
     if (!isValid(inputFile))                   //if xml file not valid
     {
-        cout << "The input file: " << input << " is invalid please choose another one" << endl;
-        outputFile<<"";
+        cout << "The input file: " << inputFile << " is invalid please choose another one" << endl;
+        outFile<<"";
         return;
     }
     if (!inFile.is_open()) {

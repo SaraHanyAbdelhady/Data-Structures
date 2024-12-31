@@ -28,10 +28,17 @@
 #include <QFontMetrics>
 
 #include "../../Validity_checker/isValid.h"
-//#include "../../most_active/most_active.h"
+#include "../../most_active/most_active.h"
 #include "../../Error_Correction/Error_Correction.h"
 #include "../../Xml_to_Json/Xml_to_Json/Xml_to_Json.h"
 #include "../../Xml_to_Graph/Xml_to_Graph/Xml_to_Graph.h"
+#include "../../Minifying_XML/Minifying.h"
+#include "../../Formatting_XML/format_xml.h"
+#include "../../Mutual_Users/Mutual_Users.h"
+#include "../../Search/wordSearch.h"
+#include "../../compress_decompress/compress_decompress.h"
+#include "../../Suggested_users/Suggested_users.h"
+#include "../../Most_influencer/Most_influencer.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

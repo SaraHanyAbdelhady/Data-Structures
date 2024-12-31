@@ -1,7 +1,7 @@
 #include <list>
 #include <unordered_set>
 #include <algorithm>
-#include "parseXML.h"
+#include "../parseXML/parseXML.h"
 #include "Suggested_users.h"
 
 list<std::string> suggested_users(const std::string& input_file, int id) {

@@ -15,14 +15,14 @@ SOURCES += \
     ../../Mutual_Users/Mutual_Users.cpp \
     ../../Search/topicSearch.cpp \
     ../../Search/wordSearch.cpp \
-    ../../Suggested_users/Suggested_users.cpp \
+    ../../Suggested_users/SuggestedUsers.cpp \
     ../../Validity_checker/isValid.cpp \
     ../../Xml_to_Graph/Xml_to_Graph/Xml_to_Graph.cpp \
     ../../Xml_to_Json/Xml_to_Json/Xml_to_Json.cpp \
     ../../compress_decompress/compress_decompress.cpp \
     ../../parseXML/parseXML.cpp \
     ../../most_active/most_active.cpp \
-    ../../Formatting_XML/format_xml.c++ \
+    ../../Formatting_XML/format_xml.cpp \
     main.cpp \
     mainwindow.cpp
 
