@@ -100,28 +100,16 @@ openings.pop();
 
      }
 
-
-    //  while(!openings.empty()){
-    //         cout<<openings.top().first<<" "<<openings.top().second<<endl;
-    //         openings.pop();
-    //      }
-
-
-    //        while(!closings.empty()){
-    //         cout<<closings.front().first<<" "<<closings.front().second<<endl;
-    //        closings.pop();
-    //      }
-     
    
    while(!closings.empty()){
 unOpened.push_back(make_pair(closings.front().second,closings.front().first));
 closings.pop();
 }
     inputFile.close();
-    if(!unClosed.empty())
-    cout<<"Unclosed not empty"<<"\n";
-    if(!unOpened.empty())
-    cout<<"UnOpened not empty"<<"\n";
+    // if(!unClosed.empty())
+    // cout<<"Unclosed not empty"<<"\n";
+    // if(!unOpened.empty())
+    // cout<<"UnOpened not empty"<<"\n";
     if(!(unClosed.empty()||unOpened.empty())){
         cout<< "The XML file is not valid "<<endl;
         cout<< "The Number of errors are "<<unOpened.size()+ unClosed.size()<< "\n";
