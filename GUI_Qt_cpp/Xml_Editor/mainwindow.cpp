@@ -357,7 +357,8 @@ void MainWindow::drawGraph() {
     string filePath = saveToXml();
     QString imgPath1 = "graph.jpg";
     string imgPath = "graph.jpg";
-    Xml_to_Graph(filePath,imgPath);
+    bool done;
+    Xml_to_Graph(filePath,imgPath,done);
 
     QImage image(imgPath1);
     if(image.isNull() || image.width() == 0 || image.height() == 0)

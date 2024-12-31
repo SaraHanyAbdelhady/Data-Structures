@@ -39,7 +39,7 @@ ifstream inputFile(filename);
 
 }
 
-
+/*
 
 
 int main()
@@ -47,3 +47,4 @@ int main()
 {
    topicSearch("Test_samples/Xml_to_json/sample.xml","blabla");
 }
+*/

@@ -105,7 +105,8 @@ int main(int argc, char *argv[]) {
             decompressing(inputFile, outputFile);
         } else if (command == "draw") {
              std::cout << "Starting Drawing graph..." << std::endl;
-            Xml_to_Graph(inputFile, outputFile);
+            bool done;
+            Xml_to_Graph(inputFile, outputFile,done);
         } else if (command == "most_active") {
              std::cout << "Starting getting the most active user..." << std::endl;
             most_active(inputFile);

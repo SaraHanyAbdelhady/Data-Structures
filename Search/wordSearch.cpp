@@ -44,9 +44,10 @@ ifstream inputFile(filename);
 }
 
 
-
+/*
 int main()
 
 {
    wordSearch("../Test_samples/Xml_to_json/sample.xml","amet");
 }
+*/
