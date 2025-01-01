@@ -78,13 +78,13 @@ int main(int argc, char *argv[]) {
 
             std::cout << "Unclosed tags:" << std::endl;
             while (!unClosed.empty()) {
-                std::cout << unClosed.top().first << " " << unClosed.top().second << std::endl;
+                std::cout << unClosed.top().first << " " <<"Line Number "<<unClosed.top().second << std::endl;
                 unClosed.pop();
             }
 
             std::cout << "Unopened tags:" << std::endl;
             for (const auto& tag : unOpened) {
-                std::cout << tag.second << " " << tag.first << std::endl;
+                std::cout << tag.second << " " <<"Line Number "<< tag.first << std::endl;
             }
         } else if (command == "format") {
             std::cout << "Starting tag formatting..." << std::endl;
