@@ -67,6 +67,7 @@ MainWindow::MainWindow(QWidget *parent) {
     QTextEdit[readOnly="true"] {
         background-color: #F4F6F7; /* Light background for read-only output */
         border-left: 5px solid #2980B9; /* Accent border for read-only text */
+        tab-stop-distance: 32px; /* Tab width equivalent to 4 spaces */
     }
     QPushButton {
         background-color: #3498DB;
@@ -165,6 +166,9 @@ MainWindow::MainWindow(QWidget *parent) {
     outputTextBox = new QTextEdit();
     outputTextBox->setReadOnly(true);
     outputTextBox->setPlaceholderText("Output Will Appear Here...");
+    QFontMetrics metrics(outputTextBox->font());
+    int tabWidth = 4 * metrics.horizontalAdvance(' '); // Calculate width for 4 spaces
+    outputTextBox->setTabStopDistance(tabWidth);
     saveFileButton = new QPushButton("Save File");
     connect(saveFileButton, &QPushButton::clicked, this, &MainWindow::saveFile);
 
@@ -357,15 +361,26 @@ void MainWindow::drawGraph() {
     string filePath = saveToXml();
     QString imgPath1 = "graph.jpg";
     string imgPath = "graph.jpg";
-    bool done;
+    bool done = false;
+    std::ostringstream oss;
+    std::streambuf* oldCoutBuffer = std::cout.rdbuf(oss.rdbuf());
+
     Xml_to_Graph(filePath,imgPath,done);
+
+    std::cout.rdbuf(oldCoutBuffer);  // Restore the original cout buffer
+
+    // Get the output and append it to QTextEdit
+    QString output = QString::fromStdString(oss.str());
 
     QImage image(imgPath1);
     if(image.isNull() || image.width() == 0 || image.height() == 0)
     {
         outputTextBox->setPlainText("The XML file is valid and no error correction is needed");
     }
-    else outputTextBox->append("<img src='"+imgPath1+"' width='370' height='500' />");
+    else if (done) outputTextBox->append("<img src='"+imgPath1+"' width='370' height='500' />");
+    else{
+        outputTextBox->setPlainText( output);
+    }
 }
 
 void MainWindow::decomp() {
@@ -590,7 +605,7 @@ void MainWindow::valid() {
         qInfo() <<unOpened[k].first<<"\n";
         }//vector
         }
-    }
+    }else outputTextBox->setPlainText("The XML file is valid......");
 
 }
 
