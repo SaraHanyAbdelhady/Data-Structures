@@ -53,24 +53,24 @@ Switch between CLI and GUI modes using command-line flags
 The application supports various commands:  
 ### Verify XML:  
   ```bash
-  xml_editor verify -i input_file.xml [-f] [-o output_file.xml]
+  xml_editor --cli verify -i input_file.xml [-f] [-o output_file.xml]
 ```
 ### 🔄 Convert XML to JSON:
   ```bash
-xml_editor json -i input_file.xml -o output_file.json
+xml_editor --cli json -i input_file.xml -o output_file.json
 ```
 ### 📉 Minify XML:
   ```bash
-xml_editor mini -i input_file.xml -o output_file.xml
+xml_editor --cli mini -i input_file.xml -o output_file.xml
 ```
 ### 📦 Compress XML:
   ```bash
-xml_editor compress -i input_file.xml -o output_file.comp
+xml_editor --cli compress -i input_file.xml -o output_file.comp
 ```
 ### 🗜️ Decompress XML:
   ```bash
 
-xml_editor decompress -i input_file.comp -o output_file.xml
+xml_editor --cli decompress -i input_file.comp -o output_file.xml
 ```
 ## 📊 Network Analysis
 
