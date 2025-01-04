@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Error_Correction",
+    "\\Validity_checker",
+    "\\Xml_to_Json",
+    "\\Xml_to_Json\\Xml_to_Json"
+  ],
+  "SelectedNode": "\\Validity_checker\\isValid.cpp",
+  "PreviewInSolutionExplorer": false
+}
