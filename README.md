@@ -53,47 +53,47 @@ Switch between CLI and GUI modes using command-line flags
 The application supports various commands:  
 ### Verify XML:  
   ```bash
-  xml_editor --cli verify -i input_file.xml [-f] [-o output_file.xml]
+  Xml_Editor --cli verify -i input_file.xml [-f] [-o output_file.xml]
 ```
 ### 🔄 Convert XML to JSON:
   ```bash
-xml_editor --cli json -i input_file.xml -o output_file.json
+Xml_Editor --cli json -i input_file.xml -o output_file.json
 ```
 ### 📉 Minify XML:
   ```bash
-xml_editor --cli mini -i input_file.xml -o output_file.xml
+Xml_Editor --cli mini -i input_file.xml -o output_file.xml
 ```
 ### 📦 Compress XML:
   ```bash
-xml_editor --cli compress -i input_file.xml -o output_file.comp
+Xml_Editor --cli compress -i input_file.xml -o output_file.comp
 ```
 ### 🗜️ Decompress XML:
   ```bash
 
-xml_editor --cli decompress -i input_file.comp -o output_file.xml
+Xml_Editor --cli decompress -i input_file.comp -o output_file.xml
 ```
 ## 📊 Network Analysis
 
 ### 🏆 Find Most Active User
 ```bash
-xml_editor --cli most_active -i input_file.xml
+Xml_Editor --cli most_active -i input_file.xml
 ```
 ### 🌟 Find Most Influencer User
 ```bash
-xml_editor --cli most_influencer -i input_file.xml
+Xml_Editor --cli most_influencer -i input_file.xml
 ```
 ### 🤝 Find Mutual Followers
 ```bash
-xml_editor --cli mutual -i input_file.xml -ids 1,2,3
+Xml_Editor --cli mutual -i input_file.xml -ids 1,2,3
 ```
 ### 🔗 Suggest Users to Follow
 ``` bash
-xml_editor --cli suggest -i input_file.xml -id 1
+Xml_Editor --cli suggest -i input_file.xml -id 1
 ```
 
 ### 🖥️ GUI Mode
 ``` bash
-xml_editor --gui
+Xml_Editor --gui
 ```
 - **File Upload**: Use the browse button to upload XML files.
 - **Operations**: Click buttons to perform operations like prettifying, minifying, or converting XML.
