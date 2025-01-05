@@ -1,0 +1,6 @@
+﻿  Mutual_Users.cpp
+  parseXML.cpp
+C:\Users\Dell\Documents\GitHub\Data-Structures\Mutual_Users\parseXML.cpp(31,26): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Dell\Documents\GitHub\Data-Structures\Mutual_Users\parseXML.cpp(31,75): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  Mutual_Users.vcxproj -> C:\Users\Dell\Documents\GitHub\Data-Structures\Mutual_Users\Debug\Mutual_Users.exe

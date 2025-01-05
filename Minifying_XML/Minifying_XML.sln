@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.35026.282
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Minifying_XML", "Minifying_XML.vcxproj", "{25C66BF4-9FC2-4385-A8BB-81051D2AB64B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{25C66BF4-9FC2-4385-A8BB-81051D2AB64B}.Debug|x64.ActiveCfg = Debug|x64
+		{25C66BF4-9FC2-4385-A8BB-81051D2AB64B}.Debug|x64.Build.0 = Debug|x64
+		{25C66BF4-9FC2-4385-A8BB-81051D2AB64B}.Debug|x86.ActiveCfg = Debug|Win32
+		{25C66BF4-9FC2-4385-A8BB-81051D2AB64B}.Debug|x86.Build.0 = Debug|Win32
+		{25C66BF4-9FC2-4385-A8BB-81051D2AB64B}.Release|x64.ActiveCfg = Release|x64
+		{25C66BF4-9FC2-4385-A8BB-81051D2AB64B}.Release|x64.Build.0 = Release|x64
+		{25C66BF4-9FC2-4385-A8BB-81051D2AB64B}.Release|x86.ActiveCfg = Release|Win32
+		{25C66BF4-9FC2-4385-A8BB-81051D2AB64B}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E272048E-CA11-424B-B91B-F5041AE78A03}
+	EndGlobalSection
+EndGlobal

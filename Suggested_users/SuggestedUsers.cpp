@@ -46,5 +46,12 @@ list<std::string> suggested_users(const std::string& input_file, int id) {
     }
 
     return suggested_users;
-}
-
+}/*
+int main() {
+    string inputFile = "../Test_samples/Xml_to_Json/sample.xml";
+    list<std::string> x = suggested_users(inputFile, 2);
+    for (const std::string& element : x) {
+        std::cout << element << std::endl;
+    }
+    return 0;
+}*/

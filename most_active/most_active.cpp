@@ -59,3 +59,7 @@ void most_active(const string& filename) {
     }
     cout << "Number of Following: " << followingCount << "\n";
 }
+//int main() {
+//    string inputFile = "../Test_samples/Xml_to_Json/sample.xml";
+//    most_active(inputFile);
+//}

@@ -1,0 +1,5 @@
+﻿  Minifying.cpp
+C:\Users\Dell\Documents\GitHub\Data-Structures\Minifying_XML\Minifying.cpp(20,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Dell\Documents\GitHub\Data-Structures\Minifying_XML\Minifying.cpp(25,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Dell\Documents\GitHub\Data-Structures\Minifying_XML\Minifying.cpp(35,23): warning C4018: '<': signed/unsigned mismatch
+  Minifying_XML.vcxproj -> C:\Users\Dell\Documents\GitHub\Data-Structures\Minifying_XML\Debug\Minifying_XML.exe

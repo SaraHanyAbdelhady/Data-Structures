@@ -120,24 +120,24 @@ closings.pop();
 
    }
 
-//   int main() {
-//     cout << "Starting tag validation..." << endl;
-//     isValid("../sample4.xml");
+   /*int main() {
+     cout << "Starting tag validation..." << endl;
+     isValid("../Test_samples/Xml_to_Json/sample4.xml");
 
-//     cout << "Unclosed tags:" << endl;
-//     while (!unClosed.empty()) {
-//         cout << unClosed.top().first << " " << unClosed.top().second << endl;
-//         unClosed.pop();
-//     }
+     cout << "Unclosed tags:" << endl;
+     while (!unClosed.empty()) {
+         cout << unClosed.top().first << " " << unClosed.top().second << endl;
+         unClosed.pop();
+     }
 
-//     cout << "Unopened tags:" << endl;
-//     while (!unOpened.empty()) {
-//         cout << unOpened.top().first << " " << unOpened.top().second << endl;
-//         unOpened.pop();
-//     }
+     cout << "Unopened tags:" << endl;
+     while (!unOpened.empty()) {
+         cout << unOpened.front().first << " " << unOpened.front().second << endl;
+         unOpened.pop_back();
+     }
 
-//     return 0;
-// }
+     return 0;
+ }*/
 
 
   

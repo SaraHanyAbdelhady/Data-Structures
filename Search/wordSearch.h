@@ -2,7 +2,10 @@
 #ifndef _wordSearch_H_
 #define _wordSearch_H_
 
-#include <bits/stdc++.h>
+//#include <bits/stdc++.h>
+#include <string>
+#include "topicSearch.h"
+
 
 using namespace std;
 

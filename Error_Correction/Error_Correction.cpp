@@ -129,12 +129,12 @@ void errorCorrection(const string& input , const string& output) {
    outputFile.close();
 }
 
-  // int main(){
-  //  cout<<isValid("../Test_samples/Xml_to_json/sample4.xml")<<"\n";
-  //  errorCorrection("../Test_samples/Xml_to_json/sample4.xml", "sample4Soln.txt");
+  /* int main(){
+    cout<<isValid("../Test_samples/Xml_to_json/sample4.xml")<<"\n";
+    errorCorrection("../Test_samples/Xml_to_json/sample4.xml", "sample4Soln.txt");
 
    
-  //    cout<<isValid("sample4Soln.txt")<<"\n";
+      cout<<isValid("sample4Soln.txt")<<"\n";
    
 
-  //  }
+    }*/

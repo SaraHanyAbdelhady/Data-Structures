@@ -40,3 +40,10 @@ list<std::string> mutual(const string& input_file, int id1, int id2, int id3)
 
     return mutual_users;
 }
+//int main() {
+//    string inputFile = "sample1.xml";
+//    list<std::string> x = mutual(inputFile, 1, 2, 3);
+//    for (const std::string& element : x) {
+//        std::cout << element << std::endl;
+//    }
+//}

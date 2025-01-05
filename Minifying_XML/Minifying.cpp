@@ -4,7 +4,7 @@ int main()
 {
     ifstream file1("input_file.xml");
     ofstream file2("output_file.xml");
-    Minifying(file1, file2);
+    Minifyingg(file1, file2);
     file1.close();
     file2.close();
     return 0;

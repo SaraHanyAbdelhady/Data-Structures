@@ -1,0 +1,20 @@
+﻿  Error_Correction.cpp
+C:\Users\Dell\Documents\GitHub\Data-Structures\Error_Correction\Error_Correction.cpp(55,21): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+C:\Users\Dell\Documents\GitHub\Data-Structures\Error_Correction\Error_Correction.cpp(55,80): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+C:\Users\Dell\Documents\GitHub\Data-Structures\Error_Correction\Error_Correction.cpp(57,39): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+C:\Users\Dell\Documents\GitHub\Data-Structures\Error_Correction\Error_Correction.cpp(61,31): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+C:\Users\Dell\Documents\GitHub\Data-Structures\Error_Correction\Error_Correction.cpp(61,54): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+C:\Users\Dell\Documents\GitHub\Data-Structures\Error_Correction\Error_Correction.cpp(62,43): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+C:\Users\Dell\Documents\GitHub\Data-Structures\Error_Correction\Error_Correction.cpp(63,38): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+C:\Users\Dell\Documents\GitHub\Data-Structures\Error_Correction\Error_Correction.cpp(66,28): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+C:\Users\Dell\Documents\GitHub\Data-Structures\Error_Correction\Error_Correction.cpp(67,33): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+C:\Users\Dell\Documents\GitHub\Data-Structures\Error_Correction\Error_Correction.cpp(69,35): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+C:\Users\Dell\Documents\GitHub\Data-Structures\Error_Correction\Error_Correction.cpp(73,37): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+C:\Users\Dell\Documents\GitHub\Data-Structures\Error_Correction\Error_Correction.cpp(86,30): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+C:\Users\Dell\Documents\GitHub\Data-Structures\Error_Correction\Error_Correction.cpp(86,89): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+C:\Users\Dell\Documents\GitHub\Data-Structures\Error_Correction\Error_Correction.cpp(100,31): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+C:\Users\Dell\Documents\GitHub\Data-Structures\Error_Correction\Error_Correction.cpp(101,39): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+C:\Users\Dell\Documents\GitHub\Data-Structures\Error_Correction\Error_Correction.cpp(108,50): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+C:\Users\Dell\Documents\GitHub\Data-Structures\Error_Correction\Error_Correction.cpp(108,88): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+C:\Users\Dell\Documents\GitHub\Data-Structures\Error_Correction\Error_Correction.cpp(119,37): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+  Error_Correction.vcxproj -> C:\Users\Dell\Documents\GitHub\Data-Structures\Error_Correction\Debug\Error_Correction.exe

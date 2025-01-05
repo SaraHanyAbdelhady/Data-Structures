@@ -116,8 +116,19 @@ void decompressing(const string& inputFileName, const string& outputFileName) {
 }
 
 // Main function to handle command-line arguments
-/*
- int main(int argc, char* argv[]) {
+/*int main(){
+    string inputFileName = "input.xml";
+    string outputFileNameComp = "output.comp";
+    string outputFileNameDecomp = "output.xml";
+
+    compressing(inputFileName, outputFileNameComp);
+
+    compressing(outputFileNameComp, outputFileNameDecomp);
+
+    cout << "done";
+    return 0;
+}*/
+ /*int main(int argc, char* argv[]) {
     if (argc < 5) {
         cout << argv[0];
         cerr << "Usage: xml_editor <operation> -i <input_file> -o <output_file>\n";
@@ -138,10 +149,10 @@ void decompressing(const string& inputFileName, const string& outputFileName) {
     }
 
     if (operation == "compress") {
-        compress(inputFileName, outputFileName);
+        compressing(inputFileName, outputFileName);
     }
     else if (operation == "decompress") {
-        decompress(inputFileName, outputFileName);
+        decompressing(inputFileName, outputFileName);
     }
     else {
         cerr << "Invalid operation. Use 'compress' or 'decompress'." << endl;
@@ -149,5 +160,4 @@ void decompressing(const string& inputFileName, const string& outputFileName) {
     }
 
     return 0;
-}
-*/
+}*/

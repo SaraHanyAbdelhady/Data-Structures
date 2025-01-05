@@ -1,0 +1,12 @@
+﻿  isValid.cpp
+C:\Users\Dell\Documents\GitHub\Data-Structures\Validity_checker\isValid.cpp(43,21): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+C:\Users\Dell\Documents\GitHub\Data-Structures\Validity_checker\isValid.cpp(43,80): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+C:\Users\Dell\Documents\GitHub\Data-Structures\Validity_checker\isValid.cpp(43,107): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+C:\Users\Dell\Documents\GitHub\Data-Structures\Validity_checker\isValid.cpp(47,31): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+C:\Users\Dell\Documents\GitHub\Data-Structures\Validity_checker\isValid.cpp(47,54): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+C:\Users\Dell\Documents\GitHub\Data-Structures\Validity_checker\isValid.cpp(48,38): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+C:\Users\Dell\Documents\GitHub\Data-Structures\Validity_checker\isValid.cpp(56,30): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+C:\Users\Dell\Documents\GitHub\Data-Structures\Validity_checker\isValid.cpp(56,89): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+C:\Users\Dell\Documents\GitHub\Data-Structures\Validity_checker\isValid.cpp(61,31): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+C:\Users\Dell\Documents\GitHub\Data-Structures\Validity_checker\isValid.cpp(62,39): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+  Validity_checker.vcxproj -> C:\Users\Dell\Documents\GitHub\Data-Structures\Validity_checker\Debug\Validity_checker.exe

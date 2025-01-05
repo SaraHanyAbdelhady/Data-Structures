@@ -1,5 +1,6 @@
 #include"../parseXML/parseXML.h"
-#include <bits/stdc++.h>
+#include <unordered_set>
+//#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -40,11 +41,8 @@ ifstream inputFile(filename);
 }
 
 /*
-
-
 int main()
-
 {
-   topicSearch("Test_samples/Xml_to_json/sample.xml","blabla");
-}
-*/
+    wordSearch("../Test_samples/Xml_to_json/sample.xml","amet");
+    topicSearch("../Test_samples/Xml_to_json/sample.xml","blabla");
+}*/

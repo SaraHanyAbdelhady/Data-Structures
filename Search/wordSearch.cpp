@@ -1,5 +1,6 @@
 #include"../parseXML/parseXML.h"
-#include <bits/stdc++.h>
+#include"topicSearch.h"
+//#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -44,10 +45,11 @@ ifstream inputFile(filename);
 }
 
 
-/*
-int main()
 
-{
-   wordSearch("../Test_samples/Xml_to_json/sample.xml","amet");
-}
-*/
+//int main()
+//
+//{
+//   wordSearch("../Test_samples/Xml_to_json/sample.xml","amet");
+//   topicSearch("../Test_samples/Xml_to_json/sample.xml","blabla");
+//}
+

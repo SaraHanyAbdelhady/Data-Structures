@@ -81,13 +81,13 @@ void format_XML(const string &inputFile, const string &outputFile) {
     inFile.close();
     outFile.close();
 }
-/*
-int main() {
-    string inputFile = "example.txt";   // Input XML file
-    string outputFile = "output.txt"; // Output XML file
+//
+//int main() {
+//    string inputFile = "example.txt";   // Input XML file
+//    string outputFile = "output.txt"; // Output XML file
+//
+//    format_XML(inputFile, outputFile);
+//
+//    return 0;
+//}
 
-    formatXML(inputFile, outputFile);
-
-    return 0;
-}
-*/

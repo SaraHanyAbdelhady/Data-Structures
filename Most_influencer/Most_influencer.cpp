@@ -31,3 +31,8 @@ void Most_influencers(const string& path) {
     cout << "Name: " << most_influential_user.name << endl;
     cout << "Number of followers: " << max_followers << endl;
 }
+//int main() {
+//    string inputFile = "../Test_samples/Xml_to_Json/sample.xml";
+//    Most_influencers(inputFile);
+//    return 0;
+//}

@@ -106,8 +106,8 @@ void Xml_to_Graph(const string& inputXML, const string& outputJpg,bool&done) {
     return 0;
 }*/
 //int main() {
-//    string inputXML = "sample3.xml";
-//    string outputJPG = "graph3.jpg";
+//    string inputXML = "../../Test_samples/Xml_to_Graph/sample3.xml";
+//    string outputJPG = "../../Test_samples/Xml_to_Graph/graph3.jpg";
 //    bool x;
 //    Xml_to_Graph(inputXML, outputJPG,x);
 //
