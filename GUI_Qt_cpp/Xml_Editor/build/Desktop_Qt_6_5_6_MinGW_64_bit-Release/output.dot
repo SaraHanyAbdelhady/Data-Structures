@@ -1,0 +1,8 @@
+digraph G {
+    graph[fontsize = 24]
+    edge[fontsize = 20 color = darkgoldenrod1]
+    node[margin=0 fontcolor=cornsilk fontsize=48 width=0.5 shape=circle style=filled fillcolor = blue2]
+    ranksep = 1.5
+    nodesep = .25
+    edge[style = "setlinewidth(3)"]
+}

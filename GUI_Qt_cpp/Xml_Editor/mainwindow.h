@@ -57,31 +57,35 @@ public:
 private:
     QWidget *container ;
     QHBoxLayout *mainLayout;
+    QHBoxLayout *users;
     QLabel *inputLabel;
+    QLabel *outputLabel;
     QTextEdit *inputTextBox;
-    QPushButton *loadFileButton;
+    QTextEdit *outputTextBox;
     QVBoxLayout *inputLayout;
     QVBoxLayout *controlLayout;
-    QPushButton *valid_button;
-    QPushButton *correct;
+    QVBoxLayout *networkAnalysis;
+    QVBoxLayout *searchLayout;
+    QVBoxLayout *outputLayout;
     QVBoxLayout *validLayout;
+    QPushButton *valid_button;
+    QPushButton *loadFileButton;
+    QPushButton *correct;
     QPushButton *prettify;
     QPushButton *json;
     QPushButton *minify;
     QPushButton *compress;
     QPushButton *decompress;
     QPushButton *draw;
-    QComboBox *networkAnalysis;
-    QComboBox *search;
-    QLineEdit *searchWord;
-    QVBoxLayout *searchLayout;
-    QLabel *outputLabel;
-    QTextEdit *outputTextBox;
     QPushButton *saveFileButton;
     QPushButton *processButton;
-    QVBoxLayout *outputLayout;
+    QComboBox *mutual_suggest;
+    QComboBox *most;
+    QComboBox *search;
+    QLineEdit *searchWord;
+    QLineEdit *user;
 
-    // privare function
+    // private function
     void highlightLine(QTextEdit* textEdit, int lineNumber);
     string saveToXml();
     void clearHighlights(QTextEdit* textEdit);
@@ -95,6 +99,7 @@ private slots:
     void mini();                    // SLot for minify button
     void comp();                    // SLot for compress button
     void decomp();                  // SLot for decompress button
+    void userAction();              // SLot for Mutual users and suggest users Combobox
     void networkanalysisAction();   // SLot for network analysis Combobox
     void searchAction();            // SLot for search Combobox
     void xml2json();                // SLot for json button

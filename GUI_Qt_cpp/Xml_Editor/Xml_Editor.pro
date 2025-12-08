@@ -52,7 +52,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    ../../../../XML/Data-Structures/Test_samples/Xml_to_Json/sample.xml
+    ../../../../../Desktop/arrow-down-icon.png \
+    ../../../../XML/Data-Structures/Test_samples/Xml_to_Json/sample.xml \
+    arrow-down-icon.png \
+    image/arrow-down-icon.png
 
 
 

@@ -1,0 +1,6 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(1091,5): warning MSB8027: Two or more files with the name of parseXML.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are ..\..\most_active\parseXML.cpp, ..\..\Most_influencer\parseXML.cpp, ..\..\Mutual_Users\parseXML.cpp, ..\..\parseXML\parseXML.cpp.
+  Xml_Editor.cpp
+Debug\parseXML.obj : warning LNK4042: object specified more than once; extras ignored
+Debug\parseXML.obj : warning LNK4042: object specified more than once; extras ignored
+Debug\parseXML.obj : warning LNK4042: object specified more than once; extras ignored
+  Xml_Editor.vcxproj -> C:\Users\Dell\Documents\GitHub\Data-Structures\Xml_Editor\Debug\Xml_Editor.exe

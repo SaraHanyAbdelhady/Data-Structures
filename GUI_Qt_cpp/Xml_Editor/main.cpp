@@ -8,22 +8,27 @@
 #include <string>
 
 int main(int argc, char *argv[]) {
+
+    std::cout << "Press Enter to exit...";
+    std::cin.get(); // Waits for user input
+
     // Flags to recognize command-line and GUI modes
     bool cmdMode = false;
-    bool guiMode = false;
-
+    bool guiMode = true;
     // Check if "--cmd" or "--gui" argument is passed to the program
     for (int i = 1; i < argc; ++i) {
-        if (QString(argv[i]) == "--cli") {
-            cmdMode = true;
-            qDebug() << "Command-line mode enabled.";
-            break;
-        } else if (QString(argv[i]) == "--gui") {
+        if (QString(argv[i]) == "--gui") {
             guiMode = true;
             qDebug() << "GUI mode enabled.";
             break;
         }
+        else if (QString(argv[i]) == "--cli") {
+            cmdMode = true;
+            qDebug() << "Command-line mode enabled.";
+            break;
+        }
     }
+    if(argc > 3 && !guiMode) cmdMode = true;
 
     if (cmdMode) {
         // Command-Line Mode (no QApplication needed)
@@ -93,22 +98,22 @@ int main(int argc, char *argv[]) {
             std::cout << "Starting tag convertion to json..." << std::endl;
             Xml_to_Json(inputFile, outputFile);
         } else if (command == "mini") {
-             std::cout << "Starting tag Minifing..." << std::endl;
+            std::cout << "Starting tag Minifing..." << std::endl;
             std::ifstream input_file(inputFile);
             std::ofstream output_file(outputFile);
             Minifyingg(input_file, output_file);
         } else if (command == "compress") {
-             std::cout << "Starting Compressing..." << std::endl;
+            std::cout << "Starting Compressing..." << std::endl;
             compressing(inputFile, outputFile);
         } else if (command == "decompress") {
-             std::cout << "Starting deCompressing..." << std::endl;
+            std::cout << "Starting deCompressing..." << std::endl;
             decompressing(inputFile, outputFile);
         } else if (command == "draw") {
-             std::cout << "Starting Drawing graph..." << std::endl;
+            std::cout << "Starting Drawing graph..." << std::endl;
             bool done;
             Xml_to_Graph(inputFile, outputFile,done);
         } else if (command == "most_active") {
-             std::cout << "Starting getting the most active user..." << std::endl;
+            std::cout << "Starting getting the most active user..." << std::endl;
             most_active(inputFile);
         } else if (command == "most_influencer") {
             std::cout << "Starting getting the most influncer..." << std::endl;
@@ -117,7 +122,7 @@ int main(int argc, char *argv[]) {
             std::cout << "Starting getting the mutual..." << std::endl;
 
             // Call the mutual function by extracting elements from the vector
-            std::list<std::string> values = mutual(inputFile, ids[0], ids[1], ids[2]);
+            std::vector<std::string> values = mutual(inputFile, ids);
 
             if (values.empty()) {
                 std::cout << "No mutual values found for the given IDs." << std::endl;
@@ -154,12 +159,12 @@ int main(int argc, char *argv[]) {
         // GUI Mode
         QApplication app(argc, argv);  // Initialize the Qt application
         MainWindow window;  // Create the MainWindow object
-        window.resize(1000, 600);  // Set the window size
-        window.show();  // Display the window
+        window.resize(1200,700);
+        window.show();  //  Display the window
         return app.exec();  // Enter the event loop for GUI mode
 
     } else {
-        std::cerr << "No valid mode specified. Use --cli or --gui." << std::endl;
+        std::cerr << "No valid command specified. Open readme file to see commands format." << std::endl;
         return 1;
     }
 }

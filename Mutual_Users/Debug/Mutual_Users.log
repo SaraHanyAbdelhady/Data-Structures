@@ -1,6 +1,8 @@
 ﻿  Mutual_Users.cpp
-  parseXML.cpp
-C:\Users\Dell\Documents\GitHub\Data-Structures\Mutual_Users\parseXML.cpp(31,26): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Dell\Documents\GitHub\Data-Structures\Mutual_Users\parseXML.cpp(31,75): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
-  Mutual_Users.vcxproj -> C:\Users\Dell\Documents\GitHub\Data-Structures\Mutual_Users\Debug\Mutual_Users.exe
+C:\Users\Dell\Documents\GitHub\Data-Structures\Mutual_Users\Mutual_Users.cpp(65,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Dell\Documents\GitHub\Data-Structures\Mutual_Users\Mutual_Users.cpp(66,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Dell\Documents\GitHub\Data-Structures\Mutual_Users\Mutual_Users.cpp(76,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Dell\Documents\GitHub\Data-Structures\Mutual_Users\Mutual_Users.cpp(84,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Dell\Documents\GitHub\Data-Structures\Mutual_Users\Mutual_Users.cpp(85,27): warning C4018: '<': signed/unsigned mismatch
+MSVCRTD.lib(exe_main.obj) : error LNK2019: unresolved external symbol _main referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
+C:\Users\Dell\Documents\GitHub\Data-Structures\Mutual_Users\Debug\Mutual_Users.exe : fatal error LNK1120: 1 unresolved externals
